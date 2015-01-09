@@ -11,6 +11,7 @@ class Authenticate extends MY_Controller {
         $this->load->model('role_model', 'role');
         $lang = $this->lang->language;
         $this->data['user_input'] = $lang;
+        echo '123';
     }
 
     public function index() {
