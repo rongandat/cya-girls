@@ -48,8 +48,10 @@ class Image_model extends CI_Model {
         return $lists;
     }
 
-    function update($data, $id) {
-        $this->db->where('id', $id);
+    function update($data, $dataWhere) {
+        foreach ($dataWhere as $key => $where){
+            $this->db->where($key, $where);
+        }
         $this->db->update('images', $data);
     }
 

@@ -99,6 +99,13 @@ class Tag_model extends CI_Model {
     function delete($data) {
         return $this->db->delete('tags', $data);
     }
+    function deleteUserTags($data) {
+        return $this->db->delete('girl_tags', $data);
+    }
+    function insertUserTags($data) {
+        $this->db->insert('girl_tags', $data);
+        return $this->db->insert_id();
+    }
 
 }
 

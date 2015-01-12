@@ -48,8 +48,8 @@ class Girls_model extends CI_Model {
     }
 
     function listGirls($data = array(), $dataIn = array(), $id = 0, $fields = '*', $limit = null, $offset = null, $order = 'id', $sort = 'DESC') {
-        $imageDefaultSql = '(select image from images where girl_id =' . $id . ' and default =1) as image';
-        $this->db->select($fields, $imageDefaultSql);
+        $imageDefaultSql = '(select image from images where girl_id = girl.id and `default` = 1 limit 1) as image';
+        $this->db->select($fields.', '.$imageDefaultSql);
         $this->db->from('girl');
         if (!empty($data)) {
             if (is_array($data)) {

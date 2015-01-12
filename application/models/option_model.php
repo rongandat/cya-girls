@@ -21,7 +21,7 @@ class Option_model extends CI_Model {
         return $query->row_array();
     }
 
-    function listOptions($data = array(), $dataIn = array(), $fields = 'options.* ', $limit = null, $offset = null, $order = 'id', $sort = 'DESC') {
+    function listOptions($data = array(), $dataIn = array(), $fields = 'options.* ', $limit = null, $offset = null, $order = 'options.order', $sort = 'ASC') {
         $this->db->select($fields);
         $this->db->from('options');
         if (!empty($data)) {
@@ -70,6 +70,9 @@ class Option_model extends CI_Model {
 
     function delete($data) {
         return $this->db->delete('options', $data);
+    }
+    function deleteOptionValue($data) {
+        return $this->db->delete('girl_option_value', $data);
     }
 
 }
