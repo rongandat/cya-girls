@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class User extends MY_Controller {
+class Girls extends MY_Controller {
 
     protected $lang;
 
@@ -15,11 +15,11 @@ class User extends MY_Controller {
         if (empty($user_session)) {
             redirect(admin_url('authenticate/login'));
         }
-        $this->data['header_title'] = $this->configs['page_title'] .' - ' .'Users';
+        $this->data['header_title'] = $this->configs['page_title'] . ' - ' . 'Users';
     }
 
     public function index() {
-        $this->data['breadcrumbs'][] = array('title' => 'Users');
+        $this->data['breadcrumbs'][] = array('title' => 'Girls');
         if (!$this->permission()) {
             $this->load('admin_layout', 'admincp/permission');
             return;
@@ -27,7 +27,7 @@ class User extends MY_Controller {
         $this->data['success'] = $this->session->flashdata('success');
         $this->load->model('user_model', 'user');
         $this->data['users'] = $this->user->getUsers();
-        $this->load('admin_layout', 'admincp/user/index');
+        $this->load('admin_layout', 'admincp/girls/index');
     }
 
     public function delete() {
@@ -48,22 +48,33 @@ class User extends MY_Controller {
         redirect(admin_url('user'));
     }
 
-    public function update($id = 0) {
-        $this->data['breadcrumbs'][] = array('link' => admin_url('user'), 'title' => 'Users');
+    public function form($id = 0) {
+        $this->data['breadcrumbs'][] = array('link' => admin_url('girls'), 'title' => 'Girls');
         $this->data['breadcrumbs'][] = array('title' => 'Update');
         if (!$this->permission()) {
             $this->load('admin_layout', 'admincp/permission');
             return;
         }
-        $this->load->model('user_model', 'user');
+        $this->load->model('girls_model', 'girl');
+        $this->load->model('option_model', 'option');
+        $this->load->model('image_model', 'image');
+        $this->load->model('tag_model', 'tag');
+        $this->load->model('girl_option_value_model', 'option_value');
 
-        $user = $this->user->getUserById($id);
+        $girl = $this->girl->getGirl(array('id' => $id));
         if (empty($user) && !empty($id)) {
-            redirect(admin_url('user/update'));
+            redirect(admin_url('girls/form'));
         }
-        $roles = $this->role->getRoles();
-        $this->data['user'] = $user;
-        $this->data['roles'] = $roles;
+        $options = $this->option->listOptions();
+        $images = $this->image->listImages(array('girl_id' => $id));
+        $tags = $this->tag->listGirlTags(array('girl_tags.girl_id' => $id));
+        $option_values = $this->option_value->listValues(array('girl_id' => $id));
+        
+        $this->data['options'] = $options;
+        $this->data['images'] = $images;
+        $this->data['tags'] = $tags;
+        $this->data['option_values'] = $option_values;
+        
         $posts = $this->input->post();
         if ($posts) {
             $this->data['user'] = $posts;
@@ -72,7 +83,7 @@ class User extends MY_Controller {
             $this->data['error'] = $error;
             if (empty($error)) {
                 unset($user['confirmPassword']);
-                
+                $user['password'] = md5($user['password']);
                 $avatar = $_FILES['avatar'];
                 if (!empty($avatar['tmp_name'])) {
                     $avtName = $user['username'] . '.' . $avatar['name'];
@@ -82,24 +93,20 @@ class User extends MY_Controller {
                     }
                 }
                 if (empty($id)) {
-                    $user['password'] = md5($user['password']);
                     $user_id = $this->user->insert($user);
                     redirect(admin_url('user'));
                     $this->session->set_flashdata('success', 'Add user success');
                 } else {
                     if (strlen($posts['password']) == 0) {
-                        unset($user['password']);
-                    }else{
-                        $user['password'] = md5($user['password']);
+                        unset($posts['password']);
                     }
-                    
                     $this->user->update($id, $user);
-                    $this->session->set_flashdata('success', 'Update user success');
                     redirect(admin_url('user'));
+                    $this->session->set_flashdata('success', 'Update user success');
                 }
             }
         }
-        $this->load('admin_layout', 'admincp/user/update');
+        $this->load('admin_layout', 'admincp/girls/form');
     }
 
     private function validate($user, $id = 0) {
