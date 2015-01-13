@@ -1,6 +1,6 @@
 <div class="page-header">
     <h1>
-        Girls
+        Webcamp
     </h1>
 </div><!-- /.page-header -->
 
@@ -34,31 +34,25 @@
             <div class="pull-right tableTools-container">
                 <div class="btn-group btn-overlap">
                     <div class="ui-jqgrid ColVis btn-group" title="" data-original-title="Show/hide columns">
-                        <a href="<?php echo admin_url('girls/form/') ?>" class="ui-pg-div ColVis_Button ColVis_MasterButton btn btn-white btn-info btn-bold"><span><i class="ui-icon ace-icon fa fa-plus-circle purple"></i></span></a>
+                        <a href="<?php echo admin_url('webcamps/update/') ?>" class="ui-pg-div ColVis_Button ColVis_MasterButton btn btn-white btn-info btn-bold"><span><i class="ui-icon ace-icon fa fa-plus-circle purple"></i></span></a>
                         <a href="javascript:void(0)" class="delete_all ui-pg-div ColVis_Button ColVis_MasterButton btn btn-white btn-info btn-bold"><span><i class="ui-icon ace-icon fa fa-trash-o red"></i></span></a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="table-header">
-            Results for "Users"
+            Results for "Webcamp"
         </div>
-        <table id="girl_list" class="ui-jqgrid table table-striped table-bordered table-hover">
+        <table id="webcamp_list" class="ui-jqgrid table table-striped table-bordered table-hover">
             <thead>
 
                 <tr>
 
-                    <th></th>
-
-                    <th>Image</th>
-
-                    <th>Title</th>
+                    <th><input type="checkbox" id="checkall"></th>
 
                     <th>Name</th>
 
-                    <th>Phone</th>
-
-                    <th>Cost</th>
+                    <th>Status</th>
 
                     <th>Action</th>
 
@@ -67,18 +61,23 @@
             </thead>
             <tbody>
 
-                <?php foreach ($girls as $girl): ?>
+                <?php foreach ($webcamps as $webcamp): ?>
+
                     <tr>
-                        <td><input type="checkbox" name="girl" value="<?php echo $girl['id'] ?>"></td>
-                        <td><a href="<?php echo admin_url('girls/form/' . $girl['id']) ?>"><img src="<?php echo base_url() ?>public/images/thumbnail/<?php echo $girl['image'] ?>"></a></td>
-                        <td><a href="<?php echo admin_url('girls/form/' . $girl['id']) ?>"><?php echo $girl['title'] ?></a></td>
-                        <td><?php echo $girl['fullname'] ?></td>
-                        <td><?php echo $girl['phone'] ?></td>
-                        <td><?php echo '$' . $girl['cost'] ?></td>
+
+                        <td><input type="checkbox" name="webcamp" value="<?php echo $webcamp['id'] ?>"></td>
+                        <td><?php echo $webcamp['name'] ?></td>
+                        <td>
+                            <?php if ($webcamp['status'] == 1): ?>
+                                <span class="label label-sm label-success">Active</span>
+                            <?php else: ?>
+                                <span class="label label-sm label-warning">DeActive</span>
+                            <?php endif; ?>
+                        </td>
 
                         <td>
-                            <a href="<?php echo admin_url('girls/form/' . $girl['id']) ?>" class="ui-pg-div ui-inline-edit"><i class="ui-icon ui-icon-pencil"></i></a>
-                            <a rel="<?php echo $girl['id'] ?>" href="javascript:void(0)" class="delete ui-pg-div ui-inline-del"><i class="ui-icon ui-icon-trash"></i></span></a>
+                            <a href="<?php echo admin_url('webcamps/update/' . $webcamp['id']) ?>" class="ui-pg-div ui-inline-edit"><i class="ui-icon ui-icon-pencil"></i></a>
+                            <a rel="<?php echo $webcamp['id'] ?>" href="javascript:void(0)" class="delete ui-pg-div ui-inline-del"><i class="ui-icon ui-icon-trash"></i></span></a>
 
                         </td>
 
@@ -94,30 +93,30 @@
     </div><!-- /.col -->
 </div><!-- /.row -->
 <script>
-    $('#girl_list').dataTable();
+    $('#webcamp_list').dataTable();
 
     /**
      * delete_item
      */
     function delete_all_item() {
-        var checkedValues = $('input[name=girl]:checked').map(function() {
+        var checkedValues = $('input[name=webcamp]:checked').map(function() {
             return this.value;
         }).get();
         var ids = checkedValues.join(',');
-        window.location = '<?php echo admin_url('girls/delete?ids=') ?>' + ids;
+        window.webcamp = '<?php echo admin_url('webcamps/delete?ids=') ?>' + ids;
     }
     /**
      * delete_item
      */
     function delete_item(id) {
-        window.location = '<?php echo admin_url('girls/delete?ids=') ?>' + id;
+        window.webcamp = '<?php echo admin_url('webcamps/delete?ids=') ?>' + id;
     }
     $(document).ready(function() {
         //override dialog's title function to allow for HTML titles
         $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
             _title: function(title) {
-                var $title = this.options.title || '&nbsp;'
-                if (("title_html" in this.options) && this.options.title_html == true)
+                var $title = this.webcamps.title || '&nbsp;'
+                if (("title_html" in this.webcamps) && this.webcamps.title_html == true)
                     title.html($title);
                 else
                     title.text($title);
@@ -134,7 +133,7 @@
                 title_html: true,
                 buttons: [
                     {
-                        html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Delete girl",
+                        html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Delete webcamp",
                         "class": "btn btn-danger btn-minier",
                         click: function() {
                             delete_item(id);
@@ -162,7 +161,7 @@
                 title_html: true,
                 buttons: [
                     {
-                        html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Delete all girls",
+                        html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Delete all select webcamps",
                         "class": "btn btn-danger btn-minier",
                         click: function() {
                             delete_all_item();

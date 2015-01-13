@@ -161,6 +161,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="locations">Locations</label>
+
+                    <div class="col-xs-10 col-sm-3">
+                        <div>
+                            <select multiple="" class="chosen-select form-control " name='locations[]' data-placeholder="Choose a State...">
+                                <?php foreach ($locations as $location): ?>
+                                <option <?php echo!empty($listGirlLocations[$location['id']])?'selected':'' ?> value="<?php echo $location['id'] ?>"><?php echo $location['name']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group <?php echo!empty($error['map']) ? ' has-error' : '' ?>">
                     <label class="col-sm-3 control-label no-padding-right" for="map"> Address </label>
                     <div class="col-sm-9">

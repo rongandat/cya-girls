@@ -144,7 +144,7 @@
                 <div class="col-xs-10 col-sm-3">
                     <span class="profile-picture">
                         <?php $avatar = !empty($user['avatar']) ? $user['avatar'] : ''; ?>
-                        <img onerror="this.src='<?php echo base_url() . 'public/avatars/profile-pic.jpg' ?>'" src="<?php echo base_url() . 'public/avatars/' . $avatar ?>" alt="<?php echo!empty($user['username']) ? $user['username'] : '' ?>'s Avatar" class="editable img-responsive editable-click editable-empty" id="avatar"></img>
+                        <img onerror="this.src='<?php echo base_url() . 'public/images/avatars/profile-pic.jpg' ?>'" src="<?php echo base_url() . 'public/images/avatars/' . $avatar ?>" alt="<?php echo!empty($user['username']) ? $user['username'] : '' ?>'s Avatar" class="editable img-responsive editable-click editable-empty" id="avatar"></img>
                     </span>
                 </div>
 

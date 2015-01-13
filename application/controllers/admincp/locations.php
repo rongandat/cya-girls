@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Options extends MY_Controller {
+class Locations extends MY_Controller {
 
     protected $lang;
 
@@ -15,7 +15,7 @@ class Options extends MY_Controller {
         if (empty($user_session)) {
             redirect(admin_url('authenticate/login'));
         }
-        $this->data['header_title'] = $this->configs['page_title'] . ' - ' . 'Users';
+        $this->data['header_title'] = $this->configs['page_title'] . ' - ' . 'Locations';
     }
 
     public function index() {
@@ -25,68 +25,68 @@ class Options extends MY_Controller {
             return;
         }
         $this->data['success'] = $this->session->flashdata('success');
-        $this->load->model('option_model', 'option');
-        $this->data['options'] = $this->option->listOptions();
-        $this->load('admin_layout', 'admincp/options/index');
+        $this->load->model('location_model', 'location');
+        $this->data['locations'] = $this->location->listLocations();
+        $this->load('admin_layout', 'admincp/locations/index');
     }
 
     public function delete() {
-        $this->load->model('option_model', 'option');
+        $this->load->model('location_model', 'location');
         $flag = true;
         $ids = $this->input->get('ids');
         $error = array();
         if (!$this->hasPermission('modify')) {
             $this->session->set_flashdata('error', 'You don\'t permission for this action');
-            redirect(admin_url('options'));
+            redirect(admin_url('locations'));
         }
 
         $idList = explode(',', $ids);
         foreach ($idList as $id) {
-            if ($this->option->delete(array('id' => $id))) {
-                $this->option->deleteOptionValue(array('option_id' => $id));
+            if ($this->location->delete(array('id' => $id))) {
+                $this->location->deleteOptionValue(array('location_id' => $id));
             }
         }
         $this->session->set_flashdata('success', 'Delete user success');
-        redirect(admin_url('options'));
+        redirect(admin_url('locations'));
     }
 
     public function update($id = 0) {
-        $this->data['breadcrumbs'][] = array('link' => admin_url('user'), 'title' => 'Options');
+        $this->data['breadcrumbs'][] = array('link' => admin_url('user'), 'title' => 'Location');
         $this->data['breadcrumbs'][] = array('title' => 'Update');
         if (!$this->permission()) {
             $this->load('admin_layout', 'admincp/permission');
             return;
         }
-        $this->load->model('option_model', 'option');
+        $this->load->model('location_model', 'location');
 
-        $option = $this->option->getOptionById($id);
-        if (empty($option) && !empty($id)) {
-            redirect(admin_url('options/update'));
+        $location = $this->location->getLocationById($id);
+        if (empty($location) && !empty($id)) {
+            redirect(admin_url('locations/update'));
         }
-        $this->data['option'] = $option;
+        $this->data['location'] = $location;
         $posts = $this->input->post();
         if ($posts) {
-            $this->data['option'] = $posts;
+            $this->data['location'] = $posts;
             $user = $posts;
             $error = $this->validate($posts, $id);
             $this->data['error'] = $error;
             if (empty($error)) {
-                $option = $posts;
+                $location = $posts;
                 if (empty($id)) {
-                    $option_id = $this->option->insert($option);
-                    redirect(admin_url('options'));
-                    $this->session->set_flashdata('success', 'Add option success');
+                    $location_id = $this->location->insert($location);
+                    redirect(admin_url('locations'));
+                    $this->session->set_flashdata('success', 'Add location success');
                 } else {
-                    $this->option->update($option, $id);
-                    $this->session->set_flashdata('success', 'Update option success');
-                    redirect(admin_url('options'));
+                    $this->location->update($location, $id);
+                    $this->session->set_flashdata('success', 'Update location success');
+                    redirect(admin_url('locations'));
                 }
             }
         }
-        $this->load('admin_layout', 'admincp/options/update');
+        $this->load('admin_layout', 'admincp/locations/update');
     }
 
-    private function validate($option, $id = 0) {
+    private function validate($location, $id = 0) {
         $posts = $this->input->post();
 
         $flag = true;
@@ -98,8 +98,8 @@ class Options extends MY_Controller {
 
 
 
-        if (empty($option['name'])) {
-            $error['name'] = 'Please enter option name';
+        if (empty($location['name'])) {
+            $error['name'] = 'Please enter location name';
         }
 
 

@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Options extends MY_Controller {
+class Webcamps extends MY_Controller {
 
     protected $lang;
 
@@ -15,7 +15,7 @@ class Options extends MY_Controller {
         if (empty($user_session)) {
             redirect(admin_url('authenticate/login'));
         }
-        $this->data['header_title'] = $this->configs['page_title'] . ' - ' . 'Users';
+        $this->data['header_title'] = $this->configs['page_title'] . ' - ' . 'Webcamps';
     }
 
     public function index() {
@@ -25,68 +25,70 @@ class Options extends MY_Controller {
             return;
         }
         $this->data['success'] = $this->session->flashdata('success');
-        $this->load->model('option_model', 'option');
-        $this->data['options'] = $this->option->listOptions();
-        $this->load('admin_layout', 'admincp/options/index');
+        $this->load->model('webcamp_model', 'webcamp');
+        $this->data['webcamps'] = $this->webcamp->listWebcamps();
+        $this->load('admin_layout', 'admincp/webcamps/index');
     }
 
     public function delete() {
-        $this->load->model('option_model', 'option');
+        $this->load->model('webcamp_model', 'webcamp');
         $flag = true;
         $ids = $this->input->get('ids');
         $error = array();
         if (!$this->hasPermission('modify')) {
             $this->session->set_flashdata('error', 'You don\'t permission for this action');
-            redirect(admin_url('options'));
+            redirect(admin_url('webcamps'));
         }
 
         $idList = explode(',', $ids);
         foreach ($idList as $id) {
-            if ($this->option->delete(array('id' => $id))) {
-                $this->option->deleteOptionValue(array('option_id' => $id));
+            if ($this->webcamp->delete(array('id' => $id))) {
+                $this->webcamp->deleteOptionValue(array('webcamp_id' => $id));
             }
         }
         $this->session->set_flashdata('success', 'Delete user success');
-        redirect(admin_url('options'));
+        redirect(admin_url('webcamps'));
     }
 
     public function update($id = 0) {
-        $this->data['breadcrumbs'][] = array('link' => admin_url('user'), 'title' => 'Options');
+        $this->data['breadcrumbs'][] = array('link' => admin_url('user'), 'title' => 'Location');
         $this->data['breadcrumbs'][] = array('title' => 'Update');
         if (!$this->permission()) {
             $this->load('admin_layout', 'admincp/permission');
             return;
         }
-        $this->load->model('option_model', 'option');
+        $this->load->model('webcamp_model', 'webcamp');
 
-        $option = $this->option->getOptionById($id);
-        if (empty($option) && !empty($id)) {
-            redirect(admin_url('options/update'));
+        $webcamp = $this->webcamp->getWebcampById($id);
+        if (empty($webcamp) && !empty($id)) {
+            redirect(admin_url('webcamps/update'));
         }
-        $this->data['option'] = $option;
+        $this->data['webcamp'] = $webcamp;
         $posts = $this->input->post();
         if ($posts) {
-            $this->data['option'] = $posts;
+            $this->data['webcamp'] = $posts;
             $user = $posts;
             $error = $this->validate($posts, $id);
             $this->data['error'] = $error;
             if (empty($error)) {
-                $option = $posts;
+                $webcamp = $posts;
+                if(!empty($webcamp['status']))
+                    $webcamp['status'] = 1;
                 if (empty($id)) {
-                    $option_id = $this->option->insert($option);
-                    redirect(admin_url('options'));
-                    $this->session->set_flashdata('success', 'Add option success');
+                    $webcamp_id = $this->webcamp->insert($webcamp);
+                    redirect(admin_url('webcamps'));
+                    $this->session->set_flashdata('success', 'Add webcamp success');
                 } else {
-                    $this->option->update($option, $id);
-                    $this->session->set_flashdata('success', 'Update option success');
-                    redirect(admin_url('options'));
+                    $this->webcamp->update($webcamp, $id);
+                    $this->session->set_flashdata('success', 'Update webcamp success');
+                    redirect(admin_url('webcamps'));
                 }
             }
         }
-        $this->load('admin_layout', 'admincp/options/update');
+        $this->load('admin_layout', 'admincp/webcamps/update');
     }
 
-    private function validate($option, $id = 0) {
+    private function validate($webcamp, $id = 0) {
         $posts = $this->input->post();
 
         $flag = true;
@@ -98,8 +100,8 @@ class Options extends MY_Controller {
 
 
 
-        if (empty($option['name'])) {
-            $error['name'] = 'Please enter option name';
+        if (empty($webcamp['name'])) {
+            $error['name'] = 'Please enter webcamp name';
         }
 
 

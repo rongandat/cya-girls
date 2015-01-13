@@ -76,7 +76,7 @@ class User extends MY_Controller {
                 $avatar = $_FILES['avatar'];
                 if (!empty($avatar['tmp_name'])) {
                     $avtName = $user['username'] . '.' . $avatar['name'];
-                    $destination = PUBLICPATH . 'avatars/' . $avtName;
+                    $destination = PUBLICPATH . 'images/avatars/' . $avtName;
                     if (@move_uploaded_file($avatar['tmp_name'], $destination)) {
                         $user['avatar'] = $avtName;
                     }

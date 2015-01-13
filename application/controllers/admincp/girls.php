@@ -31,7 +31,12 @@ class Girls extends MY_Controller {
     }
 
     public function delete() {
-        $this->load->model('user_model', 'user');
+        $this->load->model('girls_model', 'girl');
+        $this->load->model('option_model', 'option');
+        $this->load->model('location_model', 'location');
+        $this->load->model('image_model', 'image');
+        $this->load->model('tag_model', 'tag');
+        $this->load->model('girl_option_value_model', 'option_value');
         $flag = true;
         $ids = $this->input->get('ids');
         $error = array();
@@ -42,7 +47,18 @@ class Girls extends MY_Controller {
 
         $idList = explode(',', $ids);
         foreach ($idList as $id) {
-            $this->user->delete($id);
+           if($this->girl->delete(array('id' => $id))){
+               $this->option->deleteOptionValue(array('girl_id' => $id));
+               $this->location->deleteGirlLocations(array('girl_id' => $id));
+               $this->tag->deleteUserTags(array('girl_id' => $id));
+               $images = $this->image->listImages(array('girl_id' => $id));
+               if($this->image->delete(array('girl_id' => $id))){
+                   foreach ($images as $image){
+                       @unlink(PUBLICPATH . 'images/thumbnail/' . $image['image']);
+                       @unlink(PUBLICPATH . 'images/' . $image['image']);
+                   }
+               }
+           }
         }
         $this->session->set_flashdata('success', 'Delete user success');
         redirect(admin_url('user'));
@@ -57,6 +73,7 @@ class Girls extends MY_Controller {
         }
         $this->load->model('girls_model', 'girl');
         $this->load->model('option_model', 'option');
+        $this->load->model('location_model', 'location');
         $this->load->model('image_model', 'image');
         $this->load->model('tag_model', 'tag');
         $this->load->model('girl_option_value_model', 'option_value');
@@ -68,6 +85,12 @@ class Girls extends MY_Controller {
             redirect(admin_url('girls/form'));
         }
         $options = $this->option->listOptions();
+        $locations = $this->location->listLocations();
+        $girlLocations = $this->location->listGirlLocations(array('girl_id' => $id));
+        $listGirlLocations = array();
+        foreach ($girlLocations as $value) {
+            $listGirlLocations[$value['location_id']] = TRUE;
+        }
         $images = $this->image->listImages(array('girl_id' => $id));
         $tags = $this->tag->listGirlTags(array('girl_tags.girl_id' => $id));
         $optionValues = $this->option_value->listValues(array('girl_id' => $id));
@@ -78,9 +101,11 @@ class Girls extends MY_Controller {
         $this->data['id'] = $id;
         $this->data['girl'] = $girl;
         $this->data['options'] = $options;
+        $this->data['locations'] = $locations;
         $this->data['images'] = $images;
         $this->data['tags'] = $tags;
         $this->data['listValues'] = $listValues;
+        $this->data['listGirlLocations'] = $listGirlLocations;
 
         $posts = $this->input->post();
         if ($posts) {
@@ -134,6 +159,16 @@ class Girls extends MY_Controller {
                             @unlink($sourceTiny);
 
                         $this->image->insert($dataImage);
+                    }
+                }
+                
+                $this->location->deleteGirlLocations(array('girl_id' => $id));
+                if(!empty($posts['locations'])){
+                    foreach ($posts['locations'] as $locationId){
+                        $this->location->insertGirlLocation(array(
+                            'girl_id' => $id,
+                            'location_id' => $locationId
+                        ));
                     }
                 }
 
