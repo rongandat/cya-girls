@@ -20,6 +20,12 @@ class Girls extends MY_Controller {
      * map to /index.php/welcome/<method_name>
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
+    
+    public function __construct() {
+        parent::__construct();
+        $this->data['tab_locations'] = $this->getLocations();
+        $this->data['tab_tags'] = $this->getTags();
+    }
     public function index($id) {
 
         $girl = $this->girl->getGirl(array('id' => $id));
@@ -49,6 +55,8 @@ class Girls extends MY_Controller {
         $this->data['tags'] = $tags;
         $this->data['images'] = $images;
         $this->load('front_layout', 'girl/index');
+        
+        
     }
 
     public function tag($id) {

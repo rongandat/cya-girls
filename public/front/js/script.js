@@ -5,6 +5,11 @@ $(document).ready(function() {
         theme: 'light_square',
         social_tools: false
     });
+    
+    $('.search-form').on('submit',function(){
+        if($(this).find('input').val() == '')
+            return false;
+    });
 });
 // jQuery CarouFredSel
 var caroufredsel = function() {

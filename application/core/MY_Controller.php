@@ -31,9 +31,16 @@ class MY_Controller extends CI_Controller {
         $this->load->model('girl_option_value_model', 'option_value');
         $this->configs = $this->configs_model->getConfigs();
         $this->data['configs'] = $this->configs;
-        
+
         $this->data['header_title'] = '';
         $this->data['breadcrumbs'] = array();
+    }
+
+    public function getLocations() {
+        return $this->location->listLocations();
+    }
+    public function getTags() {
+        return $this->tag->listTags();
     }
 
     function load($tpl_view, $body_view = null) {
@@ -75,11 +82,11 @@ class MY_Controller extends CI_Controller {
     }
 
     public function hasPermission($permission) {
-        
+
         $this->load->model('role_model', 'role');
         $user_session = $this->session->userdata('user');
         $permissions = $this->role->getUserRole($user_session['role']);
-        
+
         $permission_list = ($permissions['permission']);
 
         if (is_array($permission_list)) {

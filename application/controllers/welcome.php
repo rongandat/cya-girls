@@ -20,6 +20,12 @@ class Welcome extends MY_Controller {
      * map to /index.php/welcome/<method_name>
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
+    public function __construct() {
+        parent::__construct();
+        $this->data['tab_locations'] = $this->getLocations();
+        $this->data['tab_tags'] = $this->getTags();
+    }
+
     public function index() {
         $this->data['header_title'] = 'Home';
         $this->load->model('girls_model', 'girl');
@@ -29,9 +35,9 @@ class Welcome extends MY_Controller {
         $this->load->model('tag_model', 'tag');
         $this->load->model('girl_option_value_model', 'option_value');
         $girls = $this->girl->listGirls(array('status' => 1));
-        
+
         $listGirls = array();
-        foreach ($girls as $girl){
+        foreach ($girls as $girl) {
             $locations = $this->location->listLocationsByGirl(array('girl_location.girl_id' => $girl['id']));
             $girl['locations'] = $locations;
             $listGirls[] = $girl;
