@@ -48,6 +48,34 @@ class Location_model extends CI_Model {
         return $lists;
     }
     
+    function listLocationsByGirl($data = array(), $dataIn = array(), $fields = 'location.*', $limit = null, $offset = null, $order = 'location.order', $sort = 'ASC') {
+        $this->db->select($fields);
+        $this->db->from('location');
+        $this->db->join('girl_location','location.id = girl_location.location_id');
+        if (!empty($data)) {
+            if (is_array($data)) {
+                foreach ($data as $key => $val) {
+                    $this->db->where($key, $val);
+                }
+            } else {
+                $this->db->where($data);
+            }
+        }
+        if (!empty($dataIn)) {
+            foreach ($dataIn as $key => $list) {
+                $this->db->where_in($key, $list);
+            }
+        }
+        if ($limit && $offset)
+            $this->db->limit($limit, $offset);
+        elseif ($limit)
+            $this->db->limit($limit);
+        $this->db->order_by($order, $sort);
+        $query = $this->db->get();
+        $lists = $query->result_array();
+        return $lists;
+    }
+    
     function listGirlLocations($data = array(), $dataIn = array(), $fields = '*', $limit = null, $offset = null, $order = 'id', $sort = 'DESC') {
         $this->db->select($fields);
         $this->db->from('girl_location');

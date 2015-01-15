@@ -118,12 +118,15 @@ class UploadHandler {
                     'auto_orient' => true
                 ),
                 // Uncomment the following to create medium sized images:
-                /*
-                  'medium' => array(
-                  'max_width' => 800,
-                  'max_height' => 600
-                  ),
-                 */
+                'medium' => array(
+                    'max_width' => 800,
+                    'max_height' => 600
+                ),
+                
+                'small' => array(
+                    'max_width' => 200,
+                    'max_height' => 200
+                ),
                 'thumbnail' => array(
                     // Uncomment the following to use a defined directory for the thumbnails
                     // instead of a subdirectory based on the version identifier.
@@ -137,7 +140,7 @@ class UploadHandler {
                     //'crop' => true,
                     'max_width' => 80,
                     'max_height' => 80
-                )
+                ),
             ),
             'print_response' => true
         );
@@ -1211,7 +1214,7 @@ class UploadHandler {
                     'no_upload' => 1,
                     'deleteUrl' => $this->options['script_url'] . '?id=' . $image['id'],
                     'deleteType' => 'DELETE',
-                    'checked' => $image['default']?'checked':'',
+                    'checked' => $image['default'] ? 'checked' : '',
                 );
             }
             $response['files'] = array_merge($oldImages, $response['files']);
@@ -1270,10 +1273,12 @@ class UploadHandler {
             $CI->load->model('image_model', 'image');
             $image = $CI->image->getImageById($id);
             if ($CI->image->delete(array('id' => $id))) {
-                @unlink(PUBLICPATH.'images/thumbnail'.$image['image']);
-                @unlink(PUBLICPATH.'images/'.$image['image']);
+                @unlink(PUBLICPATH . 'images/thumbnail/' . $image['image']);
+                @unlink(PUBLICPATH . 'images/small/' . $image['image']);
+                @unlink(PUBLICPATH . 'images/medium/' . $image['image']);
+                @unlink(PUBLICPATH . 'images/' . $image['image']);
                 echo json_encode(array($image['image'] => true));
-                return ;
+                return;
             }
         }
         $file_names = $this->get_file_names_params();

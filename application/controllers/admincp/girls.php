@@ -47,18 +47,20 @@ class Girls extends MY_Controller {
 
         $idList = explode(',', $ids);
         foreach ($idList as $id) {
-           if($this->girl->delete(array('id' => $id))){
-               $this->option->deleteOptionValue(array('girl_id' => $id));
-               $this->location->deleteGirlLocations(array('girl_id' => $id));
-               $this->tag->deleteUserTags(array('girl_id' => $id));
-               $images = $this->image->listImages(array('girl_id' => $id));
-               if($this->image->delete(array('girl_id' => $id))){
-                   foreach ($images as $image){
-                       @unlink(PUBLICPATH . 'images/thumbnail/' . $image['image']);
-                       @unlink(PUBLICPATH . 'images/' . $image['image']);
-                   }
-               }
-           }
+            if ($this->girl->delete(array('id' => $id))) {
+                $this->option->deleteOptionValue(array('girl_id' => $id));
+                $this->location->deleteGirlLocations(array('girl_id' => $id));
+                $this->tag->deleteUserTags(array('girl_id' => $id));
+                $images = $this->image->listImages(array('girl_id' => $id));
+                if ($this->image->delete(array('girl_id' => $id))) {
+                    foreach ($images as $image) {
+                        @unlink(PUBLICPATH . 'images/thumbnail/' . $image['image']);
+                        @unlink(PUBLICPATH . 'images/small/' . $image['image']);
+                        @unlink(PUBLICPATH . 'images/medium/' . $image['image']);
+                        @unlink(PUBLICPATH . 'images/' . $image['image']);
+                    }
+                }
+            }
         }
         $this->session->set_flashdata('success', 'Delete user success');
         redirect(admin_url('user'));
@@ -138,6 +140,9 @@ class Girls extends MY_Controller {
                     }
                 }
                 if (!empty($posts['images'])) {
+                    if(empty($posts['default_image'])){
+                        $posts['default_image'] = current($posts['images']);
+                    }
                     foreach ($posts['images'] as $image) {
                         $newName = $id . '.' . $image;
                         $dataImage = array(
@@ -158,13 +163,23 @@ class Girls extends MY_Controller {
                         if (@copy($sourceTiny, $destTiny))
                             @unlink($sourceTiny);
 
+                        $sourceTiny = PUBLICPATH . 'tmps/small/' . $image;
+                        $destTiny = PUBLICPATH . 'images/small/' . $newName;
+                        if (@copy($sourceTiny, $destTiny))
+                            @unlink($sourceTiny);
+
+                        $sourceTiny = PUBLICPATH . 'tmps/medium/' . $image;
+                        $destTiny = PUBLICPATH . 'images/medium/' . $newName;
+                        if (@copy($sourceTiny, $destTiny))
+                            @unlink($sourceTiny);
+
                         $this->image->insert($dataImage);
                     }
                 }
-                
+
                 $this->location->deleteGirlLocations(array('girl_id' => $id));
-                if(!empty($posts['locations'])){
-                    foreach ($posts['locations'] as $locationId){
+                if (!empty($posts['locations'])) {
+                    foreach ($posts['locations'] as $locationId) {
                         $this->location->insertGirlLocation(array(
                             'girl_id' => $id,
                             'location_id' => $locationId

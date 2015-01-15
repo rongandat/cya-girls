@@ -28,6 +28,7 @@ class MY_Controller extends CI_Controller {
     }
 
     function load($tpl_view, $body_view = null) {
+        $this->load->library('Mobiledetect');
         if (!is_null($body_view)) {
             if ($this->mobiledetect->isMobile() && file_exists(APPPATH . 'views/mobile/' . $body_view)) { // mobile
                 $body_view_path = 'mobile/' . $body_view;

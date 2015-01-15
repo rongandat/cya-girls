@@ -12,7 +12,8 @@ class Girls_model extends CI_Model {
     }
 
     function getGirl($data) {
-        $this->db->select('*');
+        $imageDefaultSql = '(select image from images where girl_id = girl.id and `default` = 1 limit 1) as image';
+        $this->db->select('*,' . $imageDefaultSql);
         $this->db->from('girl');
         foreach ($data as $key => $val) {
             $this->db->where($key, $val);
@@ -49,7 +50,7 @@ class Girls_model extends CI_Model {
 
     function listGirls($data = array(), $dataIn = array(), $id = 0, $fields = '*', $limit = null, $offset = null, $order = 'id', $sort = 'DESC') {
         $imageDefaultSql = '(select image from images where girl_id = girl.id and `default` = 1 limit 1) as image';
-        $this->db->select($fields.', '.$imageDefaultSql);
+        $this->db->select($fields . ', ' . $imageDefaultSql);
         $this->db->from('girl');
         if (!empty($data)) {
             if (is_array($data)) {
@@ -76,20 +77,23 @@ class Girls_model extends CI_Model {
         return $lists;
     }
 
-    function totalGirls($data = array(), $dataIn = array()) {
-        $this->db->select('count(id) as total');
+    function listGirlsByLocation($data = array(), $dataIn = array(), $id = 0, $fields = 'girl.*', $limit = 10, $offset = null, $order = 'id', $sort = 'DESC') {
+        $imageDefaultSql = '(select image from images where girl_id = girl.id and `default` = 1 limit 1) as image';
+        $this->db->select('DISTINCT `girl`.id,' . $fields . ', ' . $imageDefaultSql, FALSE);
         $this->db->from('girl');
+        $this->db->join('girl_location', 'girl.id = girl_location.girl_id');
+
         if (!empty($data)) {
             $this->db->where($data);
         }
         if (!empty($dataIn)) {
-            foreach ($dataIn as $list) {
-                $this->db->where_in($list);
+            foreach ($dataIn as $key => $list) {
+                $this->db->where_in($key, $list);
             }
         }
         $query = $this->db->get();
-        $lists = $query->row_array();
-        return $lists['total'];
+        $lists = $query->result_array();
+        return $lists;
     }
 
 }

@@ -21,6 +21,7 @@
         <link href="<?php echo base_url() ?>public/front/css/skins.css" rel="stylesheet">
         <!-- Google Fonts -->    
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA--E5qbTljwwsFv4KFErXHprtsB4_iO9k&sensor=false"></script>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
         <script src="<?php echo base_url() ?>public/front/js/html5shiv.min.js"></script>
@@ -131,8 +132,12 @@
                     </div>
                     <!-- /.container -->
                 </section>
-
-                <?php echo $body; ?>
+                <section id="portfolio-3" class="pad-25">
+                    <div class="container">
+                        <?php echo $body; ?>
+                        <?php echo $this->load->view("templates/front_sidebar"); ?>    
+                    </div>
+                </section>
                 <!-- /.container -->
                 <!-- /#portfolio-4 -->
             </div>

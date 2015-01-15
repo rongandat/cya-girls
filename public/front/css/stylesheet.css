@@ -80,6 +80,14 @@ a:focus {
     padding-left: 0;
 }
 
+.fll{
+    float: left;
+}
+
+.flr{
+    float: right;
+}
+
 /* Header
  * -------------------------- */
 #header.affix {
@@ -909,11 +917,18 @@ blockquote small {
 .portfolio-item .portfolio-thumb {
     position: relative;
     overflow: hidden;
+    background-color: #fff;
+    border: 1px solid #ecf0f1;
+    border-bottom: 0;
+    overflow: hidden;
 }
 
 .portfolio-item .portfolio-thumb img {
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
+    display: block;
+    float: none;
+    margin: 0 auto;
 }
 
 .portfolio-item:hover .portfolio-thumb img {
@@ -1683,10 +1698,9 @@ blockquote small {
 }
 
 .project-details-list h6 {
-    width: 100px;
+    width: 140px;
     float: left;
     font-weight: normal;
-    color: #bdc3c7;
     margin: 0;
     line-height: 1.428571429;
 }
@@ -1694,7 +1708,7 @@ blockquote small {
 .project-details-list .project-terms {
     font-weight: 400;
     color: #2c3e50;
-    margin-left: 100px;
+    margin-left: 140px;
 }
 
 .portfolio-navigation {
@@ -1764,6 +1778,7 @@ blockquote small {
     border: 1px solid #ecf0f1;
     padding: 20px;
     border-top: 0;
+    height: 220px;
 }
 .member-details .member-name {
     margin-top: 0;
@@ -1994,6 +2009,14 @@ address {
     outline: 2px solid #2c3e50;
 }
 
-.col-md-9.main{
-    padding: 0;
+
+.content{
+    font-size: 14px;
+    line-height: 1.5;
+    color: #666;
+    text-align: justify;
+}
+
+.widget.search{
+    padding: 0 0 25px;
 }

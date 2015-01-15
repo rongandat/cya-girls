@@ -47,6 +47,33 @@ class Girl_option_value_model extends CI_Model {
         $lists = $query->result_array();
         return $lists;
     }
+    function listValuesByGirl($data = array(), $dataIn = array(), $fields = '*', $limit = null, $offset = null, $order = 'options.order', $sort = 'ASC') {
+        $this->db->select($fields);
+        $this->db->from('girl_option_value');
+        $this->db->join('options', 'girl_option_value.option_id = options.id');
+        if (!empty($data)) {
+            if (is_array($data)) {
+                foreach ($data as $key => $val) {
+                    $this->db->where($key, $val);
+                }
+            } else {
+                $this->db->where($data);
+            }
+        }
+        if (!empty($dataIn)) {
+            foreach ($dataIn as $key => $list) {
+                $this->db->where_in($key, $list);
+            }
+        }
+        if ($limit && $offset)
+            $this->db->limit($limit, $offset);
+        elseif ($limit)
+            $this->db->limit($limit);
+        $this->db->order_by($order, $sort);
+        $query = $this->db->get();
+        $lists = $query->result_array();
+        return $lists;
+    }
 
     function update($data, $id) {
         $this->db->where('id', $id);
