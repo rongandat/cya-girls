@@ -21,13 +21,14 @@ class Welcome extends MY_Controller {
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
+        $this->data['header_title'] = 'Home';
         $this->load->model('girls_model', 'girl');
         $this->load->model('option_model', 'option');
         $this->load->model('location_model', 'location');
         $this->load->model('image_model', 'image');
         $this->load->model('tag_model', 'tag');
         $this->load->model('girl_option_value_model', 'option_value');
-        $girls = $this->girl->listGirls();
+        $girls = $this->girl->listGirls(array('status' => 1));
         
         $listGirls = array();
         foreach ($girls as $girl){

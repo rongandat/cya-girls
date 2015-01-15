@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Girls extends MY_Controller {
+class Location extends MY_Controller {
 
     /**
      * Index Page for this controller.
@@ -20,46 +20,19 @@ class Girls extends MY_Controller {
      * map to /index.php/welcome/<method_name>
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
-    public function index($id) {
-
-        $girl = $this->girl->getGirl(array('id' => $id));
-        if (empty($girl))
-            redirect('');
-        $this->data['header_title'] = $girl['title'];
-        $optionValue = $this->option_value->listValuesByGirl(array('girl_id' => $id), array(), 'options.name, girl_option_value.value');
-        $locations = $this->location->listLocationsByGirl(array('girl_id' => $id));
-        $locationIdList = array();
-        foreach ($locations as $location) {
-            $locationIdList[] = $location['id'];
-        }
-        $locationGirls = array();
-        if (!empty($locationIdList)) {
-            $locationGirls = $this->girl->listGirlsByLocation(array('girl.id != ' => $id),array('girl_location.location_id' => $locationIdList));
-        }
-        $this->data['locationGirls'] = $locationGirls;
-        $tags = $this->tag->listGirlTags(array('girl_id' => $id));
-        $images = $this->image->listImages(array('girl_id' => $id));
-        if (empty($girl['image']) && !empty($images)) {
-            $girl['image'] = $images[0]['image'];
-        }
-
-        $this->data['girl'] = $girl;
-        $this->data['optionValue'] = $optionValue;
-        $this->data['locations'] = $locations;
-        $this->data['tags'] = $tags;
-        $this->data['images'] = $images;
-        $this->load('front_layout', 'girl/index');
+    public function __construct() {
+        parent::__construct();
     }
 
-    public function tag($id) {
+    public function index($id = 0) {
 
         $this->data['breadcrumbs'] = array();
 
-        $tag = $this->tag->getTag(array('id' => $id));
-        if (empty($tag))
+        $location = $this->location->getLocation(array('id' => $id));
+        if (empty($location))
             redirect();
-        $this->data['header_title'] = 'Tag: '.$tag['name'];
-        
+        $this->data['header_title'] = $location['name'];
+
 
         $limit = 12;
         $page = $this->input->get('per_page');
@@ -67,14 +40,14 @@ class Girls extends MY_Controller {
             $page = 0;
         $this->data['per_page'] = $page;
         $offset = $page;
-        $girls = $this->girl->listGirlsByTag(array('girl.status' => 1, 'girl_tags.tag_id' => $id), array(), 0, 'girl.*', $limit, $offset);
-        $totalRecord = $this->girl->listTotalGirlsByTag(array('girl.status' => 1, 'girl_tags.tag_id' => $id));
+        $girls = $this->girl->listGirlsByLocation(array('girl.status' => 1, 'girl_location.location_id' => $id), array(), 0, 'girl.*', $limit, $offset);
+        $totalRecord = $this->girl->listTotalGirlsByLocation(array('girl.status' => 1, 'girl_location.location_id' => $id));
         $totalPage = ceil($totalRecord / $limit);
         $this->data['totalPage'] = $totalPage;
 
         $this->load->library('pagination');
 
-        $config['base_url'] = site_url('girls/tag/'.$id.'?');
+        $config['base_url'] = site_url('location/index/' . $id . '?');
         $config['total_rows'] = $totalRecord;
         $config['per_page'] = $limit;
         $config['page_query_string'] = TRUE;
@@ -106,7 +79,12 @@ class Girls extends MY_Controller {
             $listGirls[] = $girl;
         }
         $this->data['girls'] = $listGirls;
-        $this->load('front_layout', 'girl/tag');
+        $this->load('front_layout', 'location/index');
+    }
+
+    public function girl() {
+
+        $this->load('front_layout', 'girl');
     }
 
 }

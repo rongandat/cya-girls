@@ -1,7 +1,7 @@
 <div class="col-md-3 sidebar">
     <div class="widget search">
-        <form class="search-form">
-            <input type="text" placeholder="Search ..." class="form-control">
+        <form class="search-form" action="<?php echo site_url('search') ?>">
+            <input type="text" placeholder="Search ..." class="form-control" name="search" value="<?php echo!empty($search_text) ? $search_text : '' ?>">
         </form>
     </div>
     <!-- /.search -->                        

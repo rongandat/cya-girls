@@ -23,8 +23,17 @@ class MY_Controller extends CI_Controller {
         $this->load->library('Mobiledetect');
         $this->load->model('role_model', 'role');
         $this->load->model('configs_model');
+        $this->load->model('girls_model', 'girl');
+        $this->load->model('option_model', 'option');
+        $this->load->model('location_model', 'location');
+        $this->load->model('image_model', 'image');
+        $this->load->model('tag_model', 'tag');
+        $this->load->model('girl_option_value_model', 'option_value');
         $this->configs = $this->configs_model->getConfigs();
         $this->data['configs'] = $this->configs;
+        
+        $this->data['header_title'] = '';
+        $this->data['breadcrumbs'] = array();
     }
 
     function load($tpl_view, $body_view = null) {
