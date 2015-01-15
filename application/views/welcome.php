@@ -5,7 +5,7 @@
                 <div class="team-member">
                     <div class="member-thumb">
                         <a href="<?php echo site_url('girls/index/' . $girl['id']) ?>">
-                            <img alt="Member Image" class="img-responsive" src="<?php echo base_url('public/images/medium/' . $girl['image']) ?>">
+                            <img alt="Member Image" onerror="this.src='<?php echo base_url() . 'public/images/girl-512.gif' ?>'"  class="img-responsive" src="<?php echo base_url('public/images/medium/' . $girl['image']) ?>">
                         </a>
                     </div>
                     <div class="member-details">
@@ -21,11 +21,11 @@
                             </p>
                         <?php endforeach; ?>
                         <ul class="social-links">
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a></li>
-                            <li><a href="#" class="rss"><i class="fa fa-rss"></i></a></li>
+                            <li><a target="_blank" href="<?php echo!empty($girl['facebook']) ? $girl['facebook'] : '#' ?>" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a target="_blank" href="<?php echo!empty($girl['google_plus']) ? $girl['google_plus'] : '#' ?>" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a target="_blank" href="<?php echo!empty($girl['twitter']) ? $girl['twitter'] : '#' ?>" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a target="_blank" href="<?php echo!empty($girl['pinterest']) ? $girl['pinterest'] : '#' ?>" class="pinterest"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a target="_blank" href="<?php echo!empty($girl['home_page']) ? $girl['home_page'] : '#' ?>" class="rss"><i class="fa fa-rss"></i></a></li>
                         </ul>
                     </div>
                 </div>

@@ -108,7 +108,7 @@ class User extends MY_Controller {
         $flag = true;
         $error = array();
         if (!$this->hasPermission('modify')) {
-            $error['permission'] = 'You dont permission modify';
+            $error['permission'] = 'You don\'t permission for this action';
             $flag = false;
         }
 

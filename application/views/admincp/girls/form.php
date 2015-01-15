@@ -60,12 +60,12 @@
                 </p>
             </div>
         <?php endif; ?>
-        <?php if (!empty($error)): ?>
+        <?php if (!empty($error['permission'])): ?>
             <div class="alert alert-danger">
                 <button data-dismiss="alert" class="close" type="button">
                     <i class="ace-icon fa fa-times"></i>
                 </button>
-                <?php echo $error ?>
+                <?php echo $error['permission'] ?>
                 <br>
             </div>
         <?php endif; ?>
@@ -121,6 +121,66 @@
                     <?php endif; ?>
                 </div>
                 <div class="space-4"></div>
+                
+                <div class="form-group <?php echo!empty($error['facebook']) ? ' has-error' : '' ?>">
+                    <label class="col-sm-3 control-label no-padding-right" for="facebook"> Facebook </label>
+                    <div class="col-sm-9">
+                        <input type="text" id="facebook" name="facebook" placeholder="facebook" value="<?php echo!empty($girl['facebook']) ? $girl['facebook'] : '' ?>" class="col-xs-10 col-sm-5" />
+                    </div>
+                    <?php if (!empty($error['facebook'])): ?>
+                        <label class="col-sm-3 control-label no-padding-right" for="">  </label>
+                        <div class="help-block col-xs-12 col-sm-reset inline"> <?php echo $error['facebook'] ?> </div>
+                    <?php endif; ?>
+                </div>
+                <div class="space-4"></div>
+                
+                <div class="form-group <?php echo!empty($error['google_plus']) ? ' has-error' : '' ?>">
+                    <label class="col-sm-3 control-label no-padding-right" for="google_plus"> Google plus </label>
+                    <div class="col-sm-9">
+                        <input type="text" id="google_plus" name="google_plus" placeholder="google plus" value="<?php echo!empty($girl['google_plus']) ? $girl['google_plus'] : '' ?>" class="col-xs-10 col-sm-5" />
+                    </div>
+                    <?php if (!empty($error['google_plus'])): ?>
+                        <label class="col-sm-3 control-label no-padding-right" for="">  </label>
+                        <div class="help-block col-xs-12 col-sm-reset inline"> <?php echo $error['google_plus'] ?> </div>
+                    <?php endif; ?>
+                </div>
+                <div class="space-4"></div>
+                
+                <div class="form-group <?php echo!empty($error['twitter']) ? ' has-error' : '' ?>">
+                    <label class="col-sm-3 control-label no-padding-right" for="twitter"> Google plus </label>
+                    <div class="col-sm-9">
+                        <input type="text" id="twitter" name="twitter" placeholder="twitter" value="<?php echo!empty($girl['twitter']) ? $girl['twitter'] : '' ?>" class="col-xs-10 col-sm-5" />
+                    </div>
+                    <?php if (!empty($error['twitter'])): ?>
+                        <label class="col-sm-3 control-label no-padding-right" for="">  </label>
+                        <div class="help-block col-xs-12 col-sm-reset inline"> <?php echo $error['twitter'] ?> </div>
+                    <?php endif; ?>
+                </div>
+                <div class="space-4"></div>
+                
+                <div class="form-group <?php echo!empty($error['pinterest']) ? ' has-error' : '' ?>">
+                    <label class="col-sm-3 control-label no-padding-right" for="pinterest"> Pinterest </label>
+                    <div class="col-sm-9">
+                        <input type="text" id="pinterest" name="pinterest" placeholder="pinterest" value="<?php echo!empty($girl['pinterest']) ? $girl['pinterest'] : '' ?>" class="col-xs-10 col-sm-5" />
+                    </div>
+                    <?php if (!empty($error['pinterest'])): ?>
+                        <label class="col-sm-3 control-label no-padding-right" for="">  </label>
+                        <div class="help-block col-xs-12 col-sm-reset inline"> <?php echo $error['pinterest'] ?> </div>
+                    <?php endif; ?>
+                </div>
+                <div class="space-4"></div>
+                
+                <div class="form-group <?php echo!empty($error['home_page']) ? ' has-error' : '' ?>">
+                    <label class="col-sm-3 control-label no-padding-right" for="home_page"> Home </label>
+                    <div class="col-sm-9">
+                        <input type="text" id="home_page" name="home_page" placeholder="home page" value="<?php echo!empty($girl['home_page']) ? $girl['home_page'] : '' ?>" class="col-xs-10 col-sm-5" />
+                    </div>
+                    <?php if (!empty($error['home_page'])): ?>
+                        <label class="col-sm-3 control-label no-padding-right" for="">  </label>
+                        <div class="help-block col-xs-12 col-sm-reset inline"> <?php echo $error['home_page'] ?> </div>
+                    <?php endif; ?>
+                </div>
+                <div class="space-4"></div>
 
 
                 <div class="form-group <?php echo!empty($error['cost']) ? ' has-error' : '' ?>">
@@ -161,18 +221,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group  <?php echo!empty($error['locations']) ? ' has-error' : '' ?>">
                     <label class="col-sm-3 control-label no-padding-right" for="locations">Locations</label>
 
                     <div class="col-xs-10 col-sm-3">
                         <div>
                             <select multiple="" class="chosen-select form-control " name='locations[]' data-placeholder="Choose a State...">
                                 <?php foreach ($locations as $location): ?>
-                                <option <?php echo!empty($listGirlLocations[$location['id']])?'selected':'' ?> value="<?php echo $location['id'] ?>"><?php echo $location['name']; ?></option>
+                                <option <?php echo!empty($girl['locations'][$location['id']])?'selected':'' ?> value="<?php echo $location['id'] ?>"><?php echo $location['name']; ?></option>
                                 <?php endforeach; ?>
                             </select>
+                            
                         </div>
                     </div>
+                    <div class="clearfix"></div>
+                    <?php if (!empty($error['locations'])): ?>
+                        <label class="col-sm-3 control-label no-padding-right" for="">  </label>
+                        <div class="help-block col-xs-12 col-sm-reset inline"> <?php echo $error['locations'] ?> </div>
+                    <?php endif; ?>
                 </div>
                 <div class="form-group <?php echo!empty($error['map']) ? ' has-error' : '' ?>">
                     <label class="col-sm-3 control-label no-padding-right" for="map"> Address </label>

@@ -27,6 +27,23 @@
         <script src="<?php echo base_url() ?>public/front/js/html5shiv.min.js"></script>
         <script src="<?php echo base_url() ?>public/front/js/respond.min.js"></script>
         <![endif]-->
+        
+        <!-- /#utter-wrapper -->
+        <!-- Bootstrap JS & Others JavaScript Plugins
+            ================================================== -->
+        <!-- Placed At The End Of The Document So Page Loads Faster -->
+        <script src="<?php echo base_url() ?>public/front/js/jquery-2.0.3.min.js"></script>
+        <script src="<?php echo base_url() ?>public/front/js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="<?php echo base_url() ?>public/front/js/bootstrap.min.js"></script>
+        <script src="<?php echo base_url() ?>public/front/js/jquery.themepunch.revolution.min.js"></script>
+        <script src="<?php echo base_url() ?>public/front/js/jquery.carouFredSel-6.2.1.js"></script>
+        <script src="<?php echo base_url() ?>public/front/js/jquery.prettyPhoto.js"></script>
+        <script src="<?php echo base_url() ?>public/front/js/jflickrfeed.min.js"></script>
+        <script src="<?php echo base_url() ?>public/front/js/easing.js"></script>
+        <script src="<?php echo base_url() ?>public/front/js/jquery.ui.totop.min.js"></script>
+        <script src="<?php echo base_url() ?>public/front/js/jquery.isotope.min.js"></script>
+        <script src="<?php echo base_url() ?>public/front/js/jquery.fitvids.js"></script>
+        <script src="<?php echo base_url() ?>public/front/js/script.js"></script>
     </head>
     <body>
         <div id="utter-wrapper" class="color-skin-1">
@@ -261,22 +278,7 @@
             </footer>
             <!-- /#footer-2 -->
         </div>
-        <!-- /#utter-wrapper -->
-        <!-- Bootstrap JS & Others JavaScript Plugins
-            ================================================== -->
-        <!-- Placed At The End Of The Document So Page Loads Faster -->
-        <script src="<?php echo base_url() ?>public/front/js/jquery-2.0.3.min.js"></script>
-        <script src="<?php echo base_url() ?>public/front/js/jquery-migrate-1.2.1.min.js"></script>
-        <script src="<?php echo base_url() ?>public/front/js/bootstrap.min.js"></script>
-        <script src="<?php echo base_url() ?>public/front/js/jquery.themepunch.revolution.min.js"></script>
-        <script src="<?php echo base_url() ?>public/front/js/jquery.carouFredSel-6.2.1.js"></script>
-        <script src="<?php echo base_url() ?>public/front/js/jquery.prettyPhoto.js"></script>
-        <script src="<?php echo base_url() ?>public/front/js/jflickrfeed.min.js"></script>
-        <script src="<?php echo base_url() ?>public/front/js/easing.js"></script>
-        <script src="<?php echo base_url() ?>public/front/js/jquery.ui.totop.min.js"></script>
-        <script src="<?php echo base_url() ?>public/front/js/jquery.isotope.min.js"></script>
-        <script src="<?php echo base_url() ?>public/front/js/jquery.fitvids.js"></script>
-        <script src="<?php echo base_url() ?>public/front/js/script.js"></script>
+        
 
     </body>
 </html>

@@ -100,6 +100,7 @@ class Girls extends MY_Controller {
         foreach ($optionValues as $value) {
             $listValues[$value['option_id']] = $value['value'];
         }
+        $girl['locations'] = $listGirlLocations;
         $this->data['id'] = $id;
         $this->data['girl'] = $girl;
         $this->data['options'] = $options;
@@ -111,9 +112,8 @@ class Girls extends MY_Controller {
 
         $posts = $this->input->post();
         if ($posts) {
-            $this->data['user'] = $posts;
-            $user = $posts;
-            $error = $this->validate($user, $id);
+            $this->data['girl'] = $posts;
+            $error = $this->validate($girl, $id);
             $this->data['error'] = $error;
             if (empty($error)) {
                 $dataCommon['title'] = $posts['title'];
@@ -125,6 +125,11 @@ class Girls extends MY_Controller {
                 $dataCommon['status'] = !empty($posts['status']) ? 1 : 0;
                 $dataCommon['map'] = $posts['map'];
                 $dataCommon['content'] = $posts['content'];
+                $dataCommon['facebook'] = $posts['facebook'];
+                $dataCommon['google_plus'] = $posts['google_plus'];
+                $dataCommon['twitter'] = $posts['twitter'];
+                $dataCommon['pinterest'] = $posts['pinterest'];
+                $dataCommon['home_page'] = $posts['home_page'];
                 if (!empty($id)) {
                     $this->girl->update($dataCommon, $id);
                 } else {
@@ -225,12 +230,22 @@ class Girls extends MY_Controller {
 
     private function validate($girl, $id = 0) {
         $posts = $this->input->post();
-        if (!$this->hasPermission('modify')) {
-            $this->session->set_flashdata('error', 'You don\'t permission for this action');
-            redirect(admin_url('user'));
+         if (!$this->hasPermission('modify')) {
+            $error['permission'] = 'You don\'t permission for this action';
         }
-        $flag = true;
-        $error = array();
+        
+        if(empty($posts['locations'])){
+            $error['locations'] = 'Please select location';
+        }
+        
+        if(empty($posts['fullname'])){
+            $error['fullname'] = 'Please input fullname';
+        }
+        
+        if(empty($posts['title'])){
+            $error['title'] = 'Please input fullname';
+        }
+        
 
 
         return $error;
