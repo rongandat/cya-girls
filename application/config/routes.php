@@ -41,6 +41,11 @@
 $route['default_controller'] = "welcome";
 $route['admincp'] = "admincp/welcome";
 $route['404_override'] = '';
+$route['location/(:any)'] = "location/index/$1/0";
+$route['location/(:any)/(:num)'] = "location/index/$1/$2";
+$route['girls/tag/(:any)'] = "girls/tag/$1/0";
+$route['girls/tag/(:any)/(:num)'] = "girls/tag/$1/$2";
+$route['girls/(:any)'] = "girls/index/$1";
 
 
 /* End of file routes.php */

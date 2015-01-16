@@ -27,7 +27,7 @@
         <script src="<?php echo base_url() ?>public/front/js/html5shiv.min.js"></script>
         <script src="<?php echo base_url() ?>public/front/js/respond.min.js"></script>
         <![endif]-->
-        
+
         <!-- /#utter-wrapper -->
         <!-- Bootstrap JS & Others JavaScript Plugins
             ================================================== -->
@@ -58,65 +58,28 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="index.html">Re<span>Touch</span></a>
+                            <a class="navbar-brand" href="<?php echo site_url() ?>">Se<span>xy</span></a>
                         </div>
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse navbar-ex1-collapse">
                             <ul class="nav navbar-nav">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="index.html">Home Layout 1</a></li>
-                                        <li><a href="index-2.html">Home Layout 2</a></li>
-                                        <li><a href="index-3.html">Home Layout 3</a></li>
-                                    </ul>
+                                <li class=" <?php echo($controller == 'welcome') ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url() ?>" class="-toggle" data-toggle="">Home</a>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Features</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="elements.html">UI Elements</a></li>
-                                        <li><a href="buttons.html">Buttons</a></li>
-                                        <li><a href="icons.html">Icons</a></li>
-                                        <li><a href="pricing.html">Pricing Tables</a></li>
-                                    </ul>
+                                <li class=" <?php echo($controller == 'advertise') ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url('advertise') ?>" class="-toggle" data-toggle="">Advertise</a>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="team.html">Our Team</a></li>
-                                        <li><a href="services.html">Services</a></li>
-                                        <li><a href="faqs.html">FAQs</a></li>
-                                        <li><a href="404.html">Error 404</a></li>
-                                    </ul>
+                                <li class=" <?php echo($controller == 'webcams') ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url('webcams') ?>" class="-toggle" data-toggle="">Webcams</a>
                                 </li>
-                                <li class="dropdown active">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="portfolio-2.html">Portfolio 2 Columns</a></li>
-                                        <li><a href="portfolio-3.html">Portfolio 3 Columns</a></li>
-                                        <li class="active"><a href="portfolio-4.html">Portfolio 4 Columns</a></li>
-                                        <li><a href="portfolio-item-1.html">Portfolio Item 1</a></li>
-                                        <li><a href="portfolio-item-2.html">Portfolio Item 2</a></li>
-                                    </ul>
+                                <li class=" <?php echo($controller == 'links') ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url('links') ?>" class="-toggle" data-toggle="">Links</a>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="blog-1.html">Blog Layout 1</a></li>
-                                        <li><a href="blog-2.html">Blog Layout 2</a></li>
-                                        <li><a href="blog-3.html">Blog Layout 3</a></li>
-                                        <li><a href="blog-4.html">Blog Layout 4</a></li>
-                                        <li><a href="post-1.html">Post Layout 1</a></li>
-                                        <li><a href="post-2.html">Post Layout 2</a></li>
-                                    </ul>
+                                <li class=" <?php echo($controller == 'contact') ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url('contact') ?>" class="-toggle" data-toggle="">Contact</a>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contact</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="contact-1.html">Contact 1</a></li>
-                                        <li><a href="contact-2.html">Contact 2</a></li>
-                                    </ul>
+                                <li class=" <?php echo($controller == 'session') ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url('session/login') ?>" class="-toggle" data-toggle="">Login</a>
                                 </li>
                             </ul>
                             <!-- /.nav -->
@@ -132,18 +95,10 @@
                 <section id="page-title-wrapper" class="page-title-wrapper">
                     <div class="container">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-9">
                                 <h4><?php echo $header_title ?></h4>
                             </div>
-                            <!-- /.col-sm-6 -->
-                            <div class="col-xs-6 hidden-xs">
-                                <ol class="breadcrumb pull-right">
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">Portfolio</a></li>
-                                    <li class="active">Portfolio 4 Columns</li>
-                                </ol>
-                            </div>
-                            <!-- /.col-xs-6 -->
+
                         </div>
                         <!-- /.row -->
                     </div>
@@ -152,7 +107,9 @@
                 <section id="portfolio-3" class="pad-25">
                     <div class="container">
                         <?php echo $body; ?>
-                        <?php echo $this->load->view("templates/front_sidebar"); ?>    
+                        <?php if (empty($no_sidebar)): ?>
+                            <?php echo $this->load->view("templates/front_sidebar"); ?>    
+                        <?php endif; ?>
                     </div>
                 </section>
                 <!-- /.container -->
@@ -173,14 +130,14 @@
                                 <li><a href="#">Disclaimer</a></li>
                             </ul>
                         </div>
-                        
+
                     </div>
                     <!-- /.row -->
                 </div>
                 <!-- /.container -->
             </footer>
         </div>
-        
+
 
     </body>
 </html>

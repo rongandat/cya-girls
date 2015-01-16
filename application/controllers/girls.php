@@ -26,8 +26,8 @@ class Girls extends MY_Controller {
         $this->data['tab_locations'] = $this->getLocations();
         $this->data['tab_tags'] = $this->getTags();
     }
-    public function index($id) {
-
+    public function index($url) {
+        $id = current(explode('-', $url));
         $girl = $this->girl->getGirl(array('id' => $id));
         if (empty($girl))
             redirect('');
@@ -59,8 +59,8 @@ class Girls extends MY_Controller {
         
     }
 
-    public function tag($id) {
-
+    public function tag($url = 0, $page = 0) {
+        $id = current(explode('-', $url));
         $this->data['breadcrumbs'] = array();
 
         $tag = $this->tag->getTag(array('id' => $id));
@@ -69,7 +69,7 @@ class Girls extends MY_Controller {
         $this->data['header_title'] = 'Tag: '.$tag['name'];
         
 
-        $limit = 12;
+        $limit = 2;
         $page = $this->input->get('per_page');
         if (empty($page))
             $page = 0;
@@ -82,10 +82,9 @@ class Girls extends MY_Controller {
 
         $this->load->library('pagination');
 
-        $config['base_url'] = site_url('girls/tag/'.$id.'?');
+        $config['base_url'] = site_url('girls/tag/'.$url);
         $config['total_rows'] = $totalRecord;
         $config['per_page'] = $limit;
-        $config['page_query_string'] = TRUE;
         $config['first_tag_open'] = '<li>';
         $config['first_tag_close'] = '</li>';
         $config['first_link'] = 'First';

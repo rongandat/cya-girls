@@ -20,7 +20,7 @@
         </div>
         <ul class="widget-list">
             <?php foreach ($tab_locations as $location): ?>
-            <li><a href="<?php echo site_url('location/index/'.$location['id']) ?>"><?php echo $location['name'] ?></a></li>
+            <li><a href="<?php echo site_url('location/'.$location['id'].'-'.  convertTitle($location['name'])) ?>"><?php echo $location['name'] ?></a></li>
             <?php endforeach; ?>
         </ul>
     </div>
@@ -32,7 +32,7 @@
         </div>
         <ul class="tagcloud-list">
             <?php foreach ($tab_tags as $tag): ?>
-            <li><a href="<?php echo site_url('girls/tag/'.$tag['id']) ?>"><?php echo $tag['name'] ?></a></li>
+            <li><a href="<?php echo site_url('girls/tag/'.$tag['id'].'-'.  convertTitle($tag['name'])) ?>"><?php echo $tag['name'] ?></a></li>
             <?php endforeach; ?>
         </ul>
     </div>

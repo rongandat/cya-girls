@@ -4,18 +4,18 @@
             <div class="col-sm-6 col-md-4 team-member-wrap">
                 <div class="team-member">
                     <div class="member-thumb">
-                        <a href="<?php echo site_url('girls/index/' . $girl['id']) ?>">
+                        <a href="<?php echo site_url('girls/' . $girl['id']. '-' . convertTitle($girl['title'])) ?>">
                             <img alt="Member Image" onerror="this.src='<?php echo base_url() . 'public/images/girl-512.gif' ?>'"  class="img-responsive" src="<?php echo base_url('public/images/medium/' . $girl['image']) ?>">
                         </a>
                     </div>
                     <div class="member-details">
-                        <a href="<?php echo site_url('girls/index' . $girl['id']) ?>">
+                        <a href="<?php echo site_url('girls/' . $girl['id']. '-' . convertTitle($girl['title'])) ?>">
                             <h4 class="member-name"><?php echo $girl['fullname'] ?></h4>
                         </a>
                         <span class="position">$<?php echo $girl['cost'] ?></span>
                         <?php foreach ($girl['locations'] as $location): ?>
                             <p>
-                                <a href="<?php echo site_url('location/index/' . $location['id']) ?>"><i class="fa fa-map-marker"></i>
+                                <a href="<?php echo site_url('location/' . $location['id'] . '-' . convertTitle($location['name'])) ?>"><i class="fa fa-map-marker"></i>
                                     <?php echo $location['name'] ?>
                                 </a>
                             </p>

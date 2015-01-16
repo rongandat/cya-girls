@@ -93,6 +93,7 @@ a:focus {
 #header.affix {
     width: 100%;
     z-index: 9999;
+    position: static;
 }
 #header .navbar {
     border: 0;

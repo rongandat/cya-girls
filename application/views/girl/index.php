@@ -44,7 +44,7 @@
                         <h6>Location:</h6>
                         <?php foreach ($locations as $location): ?>
                             <div class="project-terms">
-                                <a href="<?php echo site_url('location/index/' . $location['id']) ?>"><i class="fa fa-map-marker"></i> <?php echo $location['name'] ?></a>
+                                <a href="<?php echo site_url('location/' . $location['id'] . '-' . convertTitle($location['name'])) ?>"><i class="fa fa-map-marker"></i> <?php echo $location['name'] ?></a>
                             </div>
                         <?php endforeach; ?>
                     </li>
@@ -77,7 +77,7 @@
                     </div>
                     <ul class="tagcloud-list">
                         <?php foreach ($tags as $tag): ?>
-                            <li><a href="<?php echo site_url('girls/tag/' . $tag['id']); ?>"><?php echo $tag['name'] ?></a></li>
+                            <li><a href="<?php echo site_url('girls/tag/' . $tag['id'] . '-' . convertTitle($tag['name'])); ?>"><?php echo $tag['name'] ?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
@@ -108,7 +108,7 @@
                     var geocoder;
                     var address;
                     var myLatlng;
-
+                        
                     geocoder = new google.maps.Geocoder();
                     geocoder.geocode({"address": "<?php echo $girl['map'] ?>"}, function(results, status) {
                         if (status == google.maps.GeocoderStatus.OK) {
@@ -116,7 +116,7 @@
                             //lat = results[0].geometry.location.lat();
                             //myLatlng = new google.maps.LatLng(lat,lng);
                             myLatlng = results[0].geometry.location;
-
+                                
                             mapOptions = {
                                 center: myLatlng,
                                 zoom: 15,
@@ -133,13 +133,13 @@
                             alert("Address not found");
                         }
                     });
-
+                        
                     //Wait until the DOM is fully loaded
                     $(document).ready(function() {
                         //Listen for the form submit
                         $(".showError").html("");
                     });
-
+                        
                 })(jQuery);
             </script>
         <?php endif; ?>
@@ -160,12 +160,12 @@
                             <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item-wrapper">
                                 <div class="portfolio-item">
                                     <div class="portfolio-thumb">
-                                        <a href="<?php echo site_url('girls/index/' . $locGirl['id']) ?>">
+                                        <a href="<?php echo site_url('girls/' . $locGirl['id']. '-' . convertTitle($locGirl['title'])) ?>">
                                             <img src="<?php echo base_url('public/images/small/' . $locGirl['image']) ?>" class="img-responsive">
                                         </a>
                                     </div>
                                     <div class="portfolio-details">
-                                        <h5><a href="<?php echo site_url('girls/index/' . $locGirl['id']) ?>"><?php echo $locGirl['fullname'] ?></a></h5>
+                                        <h5><a href="<?php echo site_url('girls/' . $locGirl['id']. '-' . convertTitle($locGirl['title'])) ?>"><?php echo $locGirl['fullname'] ?></a></h5>
                                         <p><?php echo '$' . $girl['cost'] ?></p>
                                     </div>
                                 </div>
