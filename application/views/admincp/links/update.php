@@ -28,6 +28,17 @@
                 <?php endif; ?>
             </div>
             <div class="space-4"></div>
+            <div class="form-group <?php echo!empty($error['url']) ? ' has-error' : '' ?>">
+                <label class="col-sm-3 control-label no-padding-right" for="url"> URL </label>
+                <div class="col-sm-9">
+                    <input type="text" id="url" name="url" placeholder="url" value="<?php echo!empty($link['url']) ? $link['url'] : '' ?>" class="col-xs-10 col-sm-5" />
+                </div>
+                <?php if (!empty($error['url'])): ?>
+                    <label class="col-sm-3 control-label no-padding-right" for="">  </label>
+                    <div class="help-block col-xs-12 col-sm-reset inline"> <?php echo $error['url'] ?> </div>
+                <?php endif; ?>
+            </div>
+            <div class="space-4"></div>
             <div class="form-group  <?php echo!empty($error['image']) ? ' has-error' : '' ?>">
                 <label class="col-sm-3 control-label no-padding-right" for="image"> Image </label>
                 <div class="col-xs-10 col-sm-3">

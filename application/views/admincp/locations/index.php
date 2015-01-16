@@ -109,7 +109,7 @@
         //override dialog's title function to allow for HTML titles
         $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
             _title: function(title) {
-                var $title = this.locations.title || '&nbsp;'
+                var $title = this.options.title || '&nbsp;'
                 if (("title_html" in this.locations) && this.locations.title_html == true)
                     title.html($title);
                 else

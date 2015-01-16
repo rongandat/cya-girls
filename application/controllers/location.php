@@ -35,7 +35,7 @@ class Location extends MY_Controller {
         $this->data['header_title'] = $location['name'];
 
 
-        $limit = 12;
+        $limit = $this->configs['record_per_page'];
         $this->data['per_page'] = $page;
         $offset = $page;
         $girls = $this->girl->listGirlsByLocation(array('girl.status' => 1, 'girl_location.location_id' => $id), array(), 0, 'girl.*', $limit, $offset);

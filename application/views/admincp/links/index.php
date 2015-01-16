@@ -103,20 +103,20 @@
             return this.value;
         }).get();
         var ids = checkedValues.join(',');
-        window.link = '<?php echo admin_url('links/delete?ids=') ?>' + ids;
+        window.location = '<?php echo admin_url('links/delete?ids=') ?>' + ids;
     }
     /**
      * delete_item
      */
     function delete_item(id) {
-        window.link = '<?php echo admin_url('links/delete?ids=') ?>' + id;
+        window.location = '<?php echo admin_url('links/delete?ids=') ?>' + id;
     }
     $(document).ready(function() {
         //override dialog's title function to allow for HTML titles
         $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
             _title: function(title) {
-                var $title = this.links.title || '&nbsp;'
-                if (("title_html" in this.links) && this.links.title_html == true)
+                var $title = this.options.title || '&nbsp;'
+                if (("title_html" in this.options) && this.options.title_html == true)
                     title.html($title);
                 else
                     title.text($title);

@@ -42,9 +42,7 @@ class Links extends MY_Controller {
 
         $idList = explode(',', $ids);
         foreach ($idList as $id) {
-            if ($this->link->delete(array('id' => $id))) {
-                $this->link->deleteOptionValue(array('link_id' => $id));
-            }
+            $this->link->delete(array('id' => $id));
         }
         $this->session->set_flashdata('success', 'Delete user success');
         redirect(admin_url('links'));
@@ -107,11 +105,6 @@ class Links extends MY_Controller {
             $flag = false;
         }
 
-
-
-        if (empty($link['name'])) {
-            $error['name'] = 'Please enter link name';
-        }
 
 
         return $error;

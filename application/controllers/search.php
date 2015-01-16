@@ -35,7 +35,7 @@ class Search extends MY_Controller {
         $this->data['header_title'] = 'Search: ' . $search;
 
 
-        $limit = 12;
+        $limit = $this->configs['record_per_page'];
         $page = $this->input->get('per_page');
         if (empty($page))
             $page = 0;

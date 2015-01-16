@@ -69,7 +69,7 @@ class Girls extends MY_Controller {
         $this->data['header_title'] = 'Tag: '.$tag['name'];
         
 
-        $limit = 2;
+        $limit = $this->configs['record_per_page'];
         $page = $this->input->get('per_page');
         if (empty($page))
             $page = 0;

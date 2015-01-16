@@ -15,7 +15,7 @@
                     var myLatlng;
 
                     geocoder = new google.maps.Geocoder();
-                    geocoder.geocode({"address": "795 Folsom Ave, Suite 600, San Francisco, CA 94107"}, function(results, status) {
+                    geocoder.geocode({"address": "<?php echo $configs['address'] ?>"}, function(results, status) {
                         if (status == google.maps.GeocoderStatus.OK) {
                             //lng = results[0].geometry.location.lng();
                             //lat = results[0].geometry.location.lat();
@@ -59,9 +59,8 @@
                         <h5><i class="fa fa-compass"></i> Visit Us</h5>
                     </div>
                     <address>
-                        <strong>FLATPOINT, INC.</strong><br>
-                        795 Folsom Ave, Suite 600<br>
-                        San Francisco, CA 94107<br>
+                        <strong><?php echo $configs['company'] ?></strong><br>
+                        <?php echo $configs['address'] ?>
                     </address>
                 </div>
                 <div class="contact-numbers pad-top-25">
@@ -69,9 +68,9 @@
                         <h5><i class="fa fa-phone"></i> Contact</h5>
                     </div>
                     <address>
-                        Phone: (123) 456-7890<br>
-                        Fax: (123) 456-7890<br>
-                        <a href="mailto:#">contact@example.com</a>
+                        Phone: <?php echo $configs['phone'] ?><br>
+                        Fax: <?php echo $configs['fax'] ?><br>
+                        <a href="mailto:<?php echo $configs['email_config'] ?>"><?php echo $configs['email_config'] ?></a>
                     </address>
                 </div>
             </div>

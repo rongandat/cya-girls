@@ -65,6 +65,46 @@ class Configs extends MY_Controller {
             ),
             array(
                 'type' => 'input',
+                'label' => 'Company',
+                'value' => array(
+                    'name' => 'company',
+                    'id' => 'company',
+                    'class' => 'help-block col-xs-12 col-sm-reset inline',
+                    'value' => !empty($this->configs['company']) ? $this->configs['company'] : ''
+                )
+            ),
+            array(
+                'type' => 'input',
+                'label' => 'Address',
+                'value' => array(
+                    'name' => 'address',
+                    'id' => 'address',
+                    'class' => 'help-block col-xs-12 col-sm-reset inline',
+                    'value' => !empty($this->configs['address']) ? $this->configs['address'] : ''
+                )
+            ),
+            array(
+                'type' => 'input',
+                'label' => 'Phone',
+                'value' => array(
+                    'name' => 'phone',
+                    'id' => 'phone',
+                    'class' => 'help-block col-xs-12 col-sm-reset inline',
+                    'value' => !empty($this->configs['phone']) ? $this->configs['phone'] : ''
+                )
+            ),
+            array(
+                'type' => 'input',
+                'label' => 'Fax',
+                'value' => array(
+                    'name' => 'fax',
+                    'id' => 'fax',
+                    'class' => 'help-block col-xs-12 col-sm-reset inline',
+                    'value' => !empty($this->configs['fax']) ? $this->configs['fax'] : ''
+                )
+            ),
+            array(
+                'type' => 'input',
                 'label' => 'Record Per Page',
                 'value' => array(
                     'name' => 'record_per_page',
