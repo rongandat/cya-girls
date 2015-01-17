@@ -42,9 +42,7 @@ class Webcamps extends MY_Controller {
 
         $idList = explode(',', $ids);
         foreach ($idList as $id) {
-            if ($this->webcamp->delete(array('id' => $id))) {
-                $this->webcamp->deleteOptionValue(array('webcamp_id' => $id));
-            }
+            $this->webcamp->delete(array('id' => $id));
         }
         $this->session->set_flashdata('success', 'Delete user success');
         redirect(admin_url('webcamps'));

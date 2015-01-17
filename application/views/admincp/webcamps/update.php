@@ -39,8 +39,19 @@
                 <?php endif; ?>
             </div>
             <div class="space-4"></div>
+            <div class="form-group <?php echo!empty($error['image_link']) ? ' has-error' : '' ?>">
+                <label class="col-sm-3 control-label no-padding-right" for="link"> Image link </label>
+                <div class="col-sm-9">
+                    <input type="text" id="image_link" name="image_link" placeholder="image link" value="<?php echo!empty($webcamp['image_link']) ? $webcamp['image_link'] : '' ?>" class="col-xs-10 col-sm-5" />
+                </div>
+                <?php if (!empty($error['image_link'])): ?>
+                    <label class="col-sm-3 control-label no-padding-right" for="">  </label>
+                    <div class="help-block col-xs-12 col-sm-reset inline"> <?php echo $error['image_link'] ?> </div>
+                <?php endif; ?>
+            </div>
+            <div class="space-4"></div>
             <div class="form-group <?php echo!empty($error['embeded']) ? ' has-error' : '' ?>">
-                <label class="col-sm-3 control-label no-padding-right" for="embeded"> Or Embeded </label>
+                <label class="col-sm-3 control-label no-padding-right" for="embeded"> Embeded </label>
                 <div class="col-sm-9">
                     <textarea id="embeded" name="embeded" class="col-xs-10 col-sm-5"><?php echo!empty($webcamp['embeded']) ? $webcamp['embeded'] : '' ?></textarea>
                 </div>
