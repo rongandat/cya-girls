@@ -1,4 +1,4 @@
-<section id="google-map" class="section google-map pad-top-50">
+<section id="google-map" class="section google-map">
     <div class="container">
         <div class="pad-25">
             <div id="map_canvas" style="width:100%; height:350px; margin: 5px 10px 0px 0px;"></div>
