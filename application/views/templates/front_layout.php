@@ -126,7 +126,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 footer-info-wrapper">
-                            <span>japanshemaleescort © 2015. All Rights Reserved.</span>                        
+                            <span><?php echo $configs['footer_text']; ?></span>                        
                         </div>
                         <!-- /.footer-info-wrapper -->
                         <div class="col-xs-12 col-sm-6 footer-links-wrapper">

@@ -65,6 +65,16 @@ class Configs extends MY_Controller {
             ),
             array(
                 'type' => 'input',
+                'label' => 'Footer',
+                'value' => array(
+                    'name' => 'footer_text',
+                    'id' => 'footer_text',
+                    'class' => 'help-block col-xs-12 col-sm-reset inline',
+                    'value' => !empty($this->configs['footer_text']) ? $this->configs['footer_text'] : ''
+                )
+            ),
+            array(
+                'type' => 'input',
                 'label' => 'Company',
                 'value' => array(
                     'name' => 'company',
@@ -124,6 +134,16 @@ class Configs extends MY_Controller {
                 )
             ),
             array(
+                'type' => 'input',
+                'label' => 'Email name',
+                'value' => array(
+                    'name' => 'email_config_name',
+                    'id' => 'email_config_name',
+                    'class' => 'help-block col-xs-12 col-sm-reset inline',
+                    'value' => !empty($this->configs['email_config_name']) ? $this->configs['email_config_name'] : ''
+                )
+            ),
+            array(
                 'type' => 'radio',
                 'label' => 'SSL',
                 'value' => array(
@@ -145,11 +165,27 @@ class Configs extends MY_Controller {
             ),
         );
 
-        $this->data['tab_option'] = array(
-        );
-        $this->data['tab_image'] = array(
-        );
         $this->data['tab_ftp'] = array(
+            array(
+                'type' => 'input',
+                'label' => 'Ftp email',
+                'value' => array(
+                    'name' => 'ftp_email',
+                    'id' => 'ftp_email',
+                    'class' => 'help-block col-xs-12 col-sm-reset inline',
+                    'value' => !empty($this->configs['ftp_email']) ? $this->configs['ftp_email'] : ''
+                )
+            ),
+            array(
+                'type' => 'input',
+                'label' => 'Ftp email sender',
+                'value' => array(
+                    'name' => 'ftp_email_sender',
+                    'id' => 'ftp_email_sender',
+                    'class' => 'help-block col-xs-12 col-sm-reset inline',
+                    'value' => !empty($this->configs['ftp_email_sender']) ? $this->configs['ftp_email_sender'] : ''
+                )
+            ),
         );
 
         $this->data['input_submit'] = array(

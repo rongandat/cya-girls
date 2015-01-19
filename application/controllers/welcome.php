@@ -50,6 +50,9 @@ class Welcome extends MY_Controller {
 
         $this->load('front_layout', 'girl');
     }
+    
+    
+    
 
 }
 
