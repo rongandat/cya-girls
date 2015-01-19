@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="shortcut icon" href="assets/ico/favicon.png">
-        <title>ReTouch - Responsive Multi-Purpose Theme</title>
+        <title>Japanshemaleescort</title>
         <!-- Bootstrap Core CSS -->
         <link href="<?php echo base_url() ?>public/front/css/bootstrap.css" rel="stylesheet">
         <!-- Plugins CSS -->
@@ -66,11 +66,8 @@
                                 <li class=" <?php echo($controller == 'welcome') ? 'active' : '' ?>">
                                     <a href="<?php echo site_url() ?>" class="-toggle" data-toggle="">Home</a>
                                 </li>
-                                <li class=" <?php echo($controller == 'advertise') ? 'active' : '' ?>">
-                                    <a href="<?php echo site_url('advertise') ?>" class="-toggle" data-toggle="">Advertise</a>
-                                </li>
-                                <li class=" <?php echo($controller == 'webcams') ? 'active' : '' ?>">
-                                    <a href="<?php echo site_url('webcams') ?>" class="-toggle" data-toggle="">Webcams</a>
+                                <li class=" <?php echo($controller == 'webcamps') ? 'active' : '' ?>">
+                                    <a href="<?php echo site_url('webcamps') ?>" class="-toggle" data-toggle="">Webcamps</a>
                                 </li>
                                 <li class=" <?php echo($controller == 'links') ? 'active' : '' ?>">
                                     <a href="<?php echo site_url('links') ?>" class="-toggle" data-toggle="">Links</a>
@@ -78,9 +75,18 @@
                                 <li class=" <?php echo($controller == 'contact') ? 'active' : '' ?>">
                                     <a href="<?php echo site_url('contact') ?>" class="-toggle" data-toggle="">Contact</a>
                                 </li>
-                                <li class=" <?php echo($controller == 'session') ? 'active' : '' ?>">
-                                    <a href="<?php echo site_url('session/login') ?>" class="-toggle" data-toggle="">Login</a>
-                                </li>
+                                <?php if (empty($auth)): ?>
+                                    <li class="<?php echo($controller == 'session') ? 'active' : '' ?>">
+                                        <a href="<?php echo site_url('session/login') ?>" class="-toggle" data-toggle="">Login</a>
+                                    </li>
+                                <?php else: ?>
+                                    <li class="dropdown">
+                                        <a data-toggle="dropdown" class="dropdown-toggle <?php echo($controller == 'session') ? 'active' : '' ?>" href="#"><?php echo $auth['firstname'] . ' ' . $auth['lastname'] ?></a>
+                                        <ul class="dropdown-menu">
+                                            <a href="<?php echo site_url('session/logout') ?>" class="-toggle" data-toggle="">Logout</a>
+                                        </ul>
+                                    </li>
+                                <?php endif; ?>
                             </ul>
                             <!-- /.nav -->
                         </div>
@@ -120,7 +126,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 footer-info-wrapper">
-                            <span>ReTouch © 2013. All Rights Reserved. <a href="http://getbootstrap.com/">Bootstrap v3.0.0</a> Powered.</span>                        
+                            <span>japanshemaleescort © 2015. All Rights Reserved.</span>                        
                         </div>
                         <!-- /.footer-info-wrapper -->
                         <div class="col-xs-12 col-sm-6 footer-links-wrapper">

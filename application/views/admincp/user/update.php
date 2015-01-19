@@ -117,7 +117,7 @@
 
                     <select id="role" name="role" class="col-xs-10 col-sm-5">
                         <?php foreach ($roles as $role): ?>
-                            <option value="<?php echo $role['id'] ?>" <?php echo ($user['role'] == $role['id']) ? 'selected' : '' ?>><?php echo $role['name'] ?></option>
+                        <option value="<?php echo $role['id'] ?>" <?php echo (!empty($user['role']) && $user['role'] == $role['id']) ? 'selected' : '' ?>><?php echo $role['name'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

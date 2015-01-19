@@ -20,6 +20,8 @@ class MY_Controller extends CI_Controller {
         $this->data['action'] = $this->router->fetch_method();
         $user_session = $this->session->userdata('user');
         $this->data['user_session'] = $user_session;
+        $auth = $this->session->userdata('auth');
+        $this->data['auth'] = $auth;
         $this->load->library('Mobiledetect');
         $this->load->model('role_model', 'role');
         $this->load->model('configs_model');

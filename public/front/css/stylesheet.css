@@ -2026,3 +2026,72 @@ address {
     padding-left: 0;
     padding-right: 20px;
 }
+
+
+.login-area {
+    padding-top: 30px;
+}
+.registration-area {
+    padding-top: 20px;
+}
+.panel-smart {
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 0;
+    padding: 20px;
+    color: #252a2f;
+}
+.panel-smart .panel-heading {
+    border-bottom: 1px solid #929497;
+    color: #252a2f;
+    padding: 5px 0 15px;
+}
+.panel-smart h3.panel-title {
+    font-size: 24px;
+}
+.panel-smart .panel-body {
+    padding: 20px 0 0;
+}
+.registration-area .inner {
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+.registration-area .control-label {
+    color: #8b8b8b;
+    font-weight: 600;
+}
+.registration-area .form-control, .registration-area .btn {
+    border-radius: 0;
+}
+.registration-area .dl-horizontal {
+}
+.registration-area .dl-horizontal dt {
+    font-weight: normal;
+}
+.registration-area .dl-horizontal dd {
+    font-weight: bold;
+}
+.registration-area .dl-horizontal dt, .registration-area .dl-horizontal dd {
+    margin-bottom: 5px;
+}
+.registration-area .dl-horizontal.total {
+    color: #9d6e47;
+    font-size: 18px;
+}
+.registration-area .dl-horizontal.total dt, .registration-area .dl-horizontal.total dd {
+    margin-bottom: 0;
+}
+
+.login-area .form-inline .form-group{
+    width: 40%;
+}
+
+.btn-brown {
+    background-color: #9d6e47;
+}
+.btn-brown:hover, .btn-brown:focus, .btn-brown:active, .btn-brown.active {
+    background-color: #80522b;
+}
+.btn-brown, .btn-brown:hover, .btn-brown:focus, .btn-brown:active, .btn-brown.active {
+    color: #fff;
+}

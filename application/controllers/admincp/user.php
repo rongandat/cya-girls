@@ -121,8 +121,8 @@ class User extends MY_Controller {
             }
 
         $regex = '/^[-a-zA-Z0-9._]+$/';
-        if (strlen($user['username']) <= 3 || strlen($posts['username']) > 255) {
-            $error['username'] = 'Username min 2 alpha character. Max 255 alpha characters. Allow \'_\' and \'.\'';
+        if (strlen($user['username']) <= 3 || strlen($posts['username']) > 25) {
+            $error['username'] = 'Username min 2 alpha character. Max 25 alpha characters. Allow \'_\' and \'.\'';
             $flag = false;
         }
         $dataUserCheck = array(
