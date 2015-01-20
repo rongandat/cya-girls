@@ -46,6 +46,7 @@ $route['location/(:any)/(:num)'] = "location/index/$1/$2";
 $route['girls/tag/(:any)'] = "girls/tag/$1/0";
 $route['girls/tag/(:any)/(:num)'] = "girls/tag/$1/$2";
 $route['girls/(:any)'] = "girls/index/$1";
+$route['page/(:any)'] = "page/index/$1";
 
 
 /* End of file routes.php */

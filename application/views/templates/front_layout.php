@@ -130,10 +130,10 @@
                         </div>
                         <!-- /.footer-info-wrapper -->
                         <div class="col-xs-12 col-sm-6 footer-links-wrapper">
-                            <ul class="list-inline">
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Terms Of Service</a></li>
-                                <li><a href="#">Disclaimer</a></li>
+                            <ul class="list-inline flr">
+                                <?php foreach ($informations as $information): ?>
+                                    <li><a href="<?php echo site_url('page/' . $information['id'] . '-' . convertTitle($information['title'])) ?>"><?php echo $information['title'] ?></a></li>
+                                <?php endforeach; ?>
                             </ul>
                         </div>
 
