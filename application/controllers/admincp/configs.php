@@ -65,6 +65,26 @@ class Configs extends MY_Controller {
             ),
             array(
                 'type' => 'input',
+                'label' => 'Page keyword',
+                'value' => array(
+                    'name' => 'page_keyword',
+                    'id' => 'page_keyword',
+                    'class' => 'help-block col-xs-12 col-sm-reset inline',
+                    'value' => !empty($this->configs['page_keyword']) ? $this->configs['page_keyword'] : ''
+                )
+            ),
+            array(
+                'type' => 'input',
+                'label' => 'Page description',
+                'value' => array(
+                    'name' => 'page_description',
+                    'id' => 'page_description',
+                    'class' => 'help-block col-xs-12 col-sm-reset inline',
+                    'value' => !empty($this->configs['page_description']) ? $this->configs['page_description'] : ''
+                )
+            ),
+            array(
+                'type' => 'input',
                 'label' => 'Footer',
                 'value' => array(
                     'name' => 'footer_text',

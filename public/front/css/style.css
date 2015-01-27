@@ -1,0 +1,447 @@
+/* 
+    Document   : style
+    Created on : Jan 23, 2015, 2:35:50 PM
+    Author     : admin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+    display: block;
+}
+
+audio,
+canvas,
+video {
+    display: inline-block;
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+[hidden] {
+    display: none;
+}
+
+html {
+    font-family: Tahoma;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+a{
+    color: #fff;
+    text-decoration: none;
+}
+a:focus {
+    outline: thin dotted;
+}
+
+a:active,
+a:hover {
+    outline: 0;
+}
+
+.fll{
+    float: left;
+}
+
+.flr{
+    float: right;
+}
+
+.clb{
+    clear: both;
+}
+
+body{
+    background: #000000;
+    color: #fff;
+    width: 900px;
+    margin: 0 auto;
+    font-family: Tahoma;
+
+    font-size: 12px;
+}
+
+ul{
+
+}
+
+#header{
+    display: block;
+    height: 200px;
+    width: 100%;
+    background: url('../img/top_images.png') no-repeat;
+}
+
+
+#header .login-area{
+    height: 82px;
+    width: 880px;
+    position: relative;
+    margin: 0 auto;
+    vertical-align: text-bottom;
+    padding: 5px 0 0 0
+}
+#header .login-area .lg-rg{
+    vertical-align: text-bottom;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    font-size: 13px;
+
+}
+#header .login-area .lg-rg li{
+    display: inline-block;
+
+}
+
+#header .search{
+    height: 71px;
+    width: 880px;
+    margin: 5px auto 0;
+}
+
+#header .search .form{
+    float: left;
+    padding: 15px 0;
+}
+
+#header .search .form input[type=text]{
+    height: 30px;
+    padding: 2px 5px;
+    width: 250px;
+}
+#header .search .form input[type=submit]{
+    height: 38px;
+    width: 53px;
+    background: url('../img/go.png') no-repeat;
+    border: 0;
+    text-indent: -9999px;
+}
+#header .search .images-escost{
+    float: right;
+    padding: 10px 0;
+}
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.list-inline {
+    padding-left: 0;
+    list-style: none;
+}
+
+.list-inline > li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.nav-header ul{
+    width: 800px;
+    margin: 3px auto;
+    font-size: 16px;
+    padding: 0;
+}
+.nav-header ul li{
+    text-align: center;
+}
+
+.nav-header ul li.schema{
+    width: 155px;
+}
+.nav-header ul li.advertise{
+    width: 115px;
+}
+.nav-header ul li.webcams{
+    width: 110px;
+}
+.nav-header ul li.links{
+    width: 96px;
+}
+.nav-header ul li.contact{
+    width: 96px;
+}
+.nav-header ul li.recuit{
+    width: 128px;
+}
+
+#container{
+    background: #333333;
+}
+
+#container .content{
+    width: 650px;
+    float: left;
+}
+
+#container .content{
+    width: 630px;
+    padding: 5px 10px;
+    float: left;
+}
+
+#container .sidebar{
+    width: 230px;
+    padding: 5px 10px;
+    float: right;
+}
+
+
+h1.title {
+    background: none repeat scroll 0 0 #000;
+    border-radius: 5px;
+    display: block;
+    font-size: 22px;
+    font-weight: normal;
+    margin: 0 0 15px;
+    padding: 5px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+ul.grid-view{
+    list-style: none;
+    width: 100%;
+    width: 640px;
+}
+
+ul.grid-view li{
+    background: none repeat scroll 0 0 #000000;
+    display: inline-block;
+    margin: 0 5px 15px 0;
+    overflow: hidden;
+    width: 150px;
+}
+
+.inimgbox {
+    height: 210px;
+    margin: auto;
+    overflow: hidden;
+    width: 135px;
+}
+
+.inimagetext {
+    color: #ffffff;
+    font-size: 12px;
+    padding: 3px 0;
+    text-align: center;
+}
+
+
+.inimagetext a, .inimagetext a:visited {
+    color: #ffffff;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+
+.wc-img{
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px;
+}
+
+div.locations{
+    width: 100%;
+    border: 1px solid #C0C0C0;
+}
+
+div.locations .header{
+    text-align: center;
+    display: block;
+    font-size: 13px;
+    padding: 10px;
+}
+div.locations .location-area{
+    padding: 0 10px;
+    text-align: center
+}
+
+div.locations .location-area a{
+    display: inline-block;
+    border-right: 1px solid #fff;
+    padding: 0 5px;
+    line-height: 1;
+    margin: 3px 0;
+    text-align: center
+}
+
+div.locations .location-area a:last-of-type{
+    border-right: 0;
+}
+
+#footer1{
+    background: #333333;
+    padding: 10px 0;
+}
+
+
+#footer1 .title {
+    color: #800000;
+    font-weight: bold;
+    padding: 10px;
+    size: 14px;
+    text-align: center;
+}
+
+#footer1 .tags a{
+    border-right: 2px solid #fff;
+    padding: 0 3px;
+    line-height: 1;
+    margin: 3px 0;
+    text-decoration: underline;
+} 
+
+#footer1 .tags a.big{
+    font-size: 14px;
+}
+#footer1 .tags a.biggest{
+    font-size: 16px;
+}
+#footer2 {
+    padding-bottom: 30px;
+}
+#footer2 ul.page{
+    list-style: none;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+
+}
+
+#footer2 ul.page li{
+    display: inline-block;
+    padding: 0 5px;
+}
+
+#footer2 ul.page li a{
+    color: #ff00da;
+    text-decoration: underline;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#footer2 .text-footer{
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+
+#footer2 .text-footer a{
+    text-decoration: underline;
+}
+
+.red{
+    color: red
+}
+
+#gallery {
+    padding: 30px;
+    background: #000;
+}
+#descriptions {
+    position: relative;
+    height: 50px;
+    background: #EEE;
+    margin-top: 10px;
+    width: 640px;
+    padding: 10px;
+    overflow: hidden;
+}
+#descriptions .ad-image-description {
+    position: absolute;
+}
+#descriptions .ad-image-description .ad-description-title {
+    display: block;
+}
+
+
+.profiletablebox {
+    background: none repeat scroll 0 0 #e4e4e4;
+    margin: 15px 0;
+    width: 100%;
+}
+
+
+.profiletablebox td {
+    background: none repeat scroll 0 0 #ffffff;
+    color: #000000;
+    font-size: 13px;
+    padding: 7px 10px;
+}
+
+.profiletablebox td a{
+    color: #000;
+}
+
+.lineheight {
+    line-height: 19px;
+    padding: 20px 0
+}
+
+
+.tageskeyhd {
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 8px;
+    text-transform: uppercase;
+    padding-top: 20px;
+}
+
+
+ul.tagskeylink {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.tagskeylink li {
+    background: url("../img/tegs_key_devider.jpg") no-repeat scroll right center rgba(0, 0, 0, 0);
+    display: block;
+    float: left;
+}
+
+ul.tagskeylink li a, ul.tagskeylink li a:visited {
+    color: #fff;
+    display: block;
+    float: left;
+    font-size: 12px;
+    padding: 3px 8px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+ul.pagination{
+    list-style: none;
+}
+
+ul.pagination li{
+    display: inline;
+    padding: 5px;
+}
+ul.pagination li.active a{
+    color: #666
+}

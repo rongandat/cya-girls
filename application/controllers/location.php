@@ -23,7 +23,6 @@ class Location extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->data['tab_locations'] = $this->getLocations();
-        $this->data['tab_tags'] = $this->getTags();
     }
 
     public function index($url = 0, $page = 0) {

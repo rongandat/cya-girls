@@ -246,6 +246,8 @@ class Girls extends MY_Controller {
             $error['title'] = 'Please input fullname';
         }
         
+        if(empty($posts['locations']))
+            $error['locations'] = 'Please select location';
 
 
         return $error;

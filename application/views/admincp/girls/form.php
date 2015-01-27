@@ -193,9 +193,9 @@
                         <input name="cost" value="<?php echo (!empty($girl['cost'])) ? $girl['cost'] : 0.00 ?>" class="input-sm" type="text" />
                         <span class="lbl"></span>
                     </div>
-                    <?php if (!empty($error['status'])): ?>
+                    <?php if (!empty($error['cost'])): ?>
                         <label class="col-sm-3 control-label no-padding-right" for="">  </label>
-                        <div class="help-block col-xs-12 col-sm-reset inline"> <?php echo $error['status'] ?> </div>
+                        <div class="help-block col-xs-12 col-sm-reset inline"> <?php echo $error['cost'] ?> </div>
                     <?php endif; ?>
                 </div>
 

@@ -25,6 +25,7 @@ a {
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
     font-family: 'Montserrat', sans-serif;
+    
 }
 
 a:hover, a:focus {
@@ -2095,3 +2096,86 @@ address {
 .btn-brown, .btn-brown:hover, .btn-brown:focus, .btn-brown:active, .btn-brown.active {
     color: #fff;
 }
+
+.tags {
+    background-color: #fff;
+    border: 1px solid #d5d5d5;
+    color: #777;
+    display: inline-block;
+    padding: 4px 6px;
+    vertical-align: middle;
+    width: 206px;
+}
+.tags:hover {
+    border-color: #b5b5b5;
+}
+.tags-hover, .tags-hover:hover {
+    border-color: #f59942;
+    outline: 0 none;
+}
+.tags[class*="span"] {
+    float: none;
+    margin-left: 0;
+}
+.tags input[type="text"], .tags input[type="text"]:focus {
+    border: medium none;
+    box-shadow: none;
+    display: inline;
+    line-height: 18px;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    width: 100%;
+}
+.tags .tag {
+    background-color: #91b8d0;
+    color: #fff;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 3px;
+    margin-right: 3px;
+    padding: 4px 22px 5px 9px;
+    position: relative;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease 0s;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+.tags .tag:empty {
+    display: none;
+}
+.tags .tag-important {
+    background-color: #d15b47;
+}
+.tags .tag-warning {
+    background-color: #ffb752;
+}
+.tags .tag-success {
+    background-color: #87b87f;
+}
+.tags .tag-info {
+    background-color: #6fb3e0;
+}
+.tags .tag-inverse {
+    background-color: #555;
+}
+.tags .tag .close {
+    bottom: 0;
+    color: #fff;
+    float: none;
+    font-size: 15px;
+    line-height: 20px;
+    opacity: 1;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    text-shadow: none;
+    top: 0;
+    width: 18px;
+}
+.tags .tag .close:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+

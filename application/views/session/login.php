@@ -1,3 +1,11 @@
+<h1 class="title"><?php echo $header_title; ?></h1>
+<?php if (!empty($error)): ?>
+    <div class="alert alert-danger alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <strong>Oh snap! </strong> <?php echo $error; ?>
+    </div>
+<?php endif; ?>
+
 <section class="login-area pad-25">
     <div class="row">
         <div class="col-sm-6">
@@ -7,12 +15,7 @@
                     <h3 class="panel-title">Login</h3>
                 </div>
                 <div class="panel-body">
-                    <?php if (!empty($error)): ?>
-                        <div class="alert alert-danger alert-dismissable">
-                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                            <strong>Oh snap! </strong> <?php echo $error; ?>
-                        </div>
-                    <?php endif; ?>
+
                     <p>
                         Please login using your existing account
                     </p>

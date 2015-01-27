@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Webcamps extends MY_Controller {
+class Webcams extends MY_Controller {
 
     /**
      * Index Page for this controller.
@@ -23,14 +23,13 @@ class Webcamps extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->data['tab_locations'] = $this->getLocations();
-        $this->data['tab_tags'] = $this->getTags();
     }
 
     public function index() {
         $this->data['header_title'] = 'Webcamps';
         $this->load->model('webcamp_model', 'webcamp');
-        $this->data['webcamps'] = $this->webcamp->listWebcamps(array('status' => 1));
-        $this->load('front_layout', 'webcamps/index');
+        $this->data['webcams'] = $this->webcamp->listWebcamps(array('status' => 1));
+        $this->load('front_layout', 'webcams/index');
     }
 
     public function girl() {

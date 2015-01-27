@@ -48,6 +48,25 @@ class Tag_model extends CI_Model {
         return $lists;
     }
 
+    function listAllTags($data = array(), $order = 'id', $sort = 'DESC') {
+        $fields = '(select count(id) from girl_tags where tag_id=tags.id) as count, tags.*';
+        $this->db->select($fields);
+        $this->db->from('tags');
+        if (!empty($data)) {
+            if (is_array($data)) {
+                foreach ($data as $key => $val) {
+                    $this->db->where($key, $val);
+                }
+            } else {
+                $this->db->where($data);
+            }
+        }
+        $this->db->order_by($order, $sort);
+        $query = $this->db->get();
+        $lists = $query->result_array();
+        return $lists;
+    }
+
     function listGirlTags($data = array(), $dataIn = array(), $fields = 'tags.*', $limit = null, $offset = null, $order = 'id', $sort = 'DESC') {
         $this->db->select($fields);
         $this->db->from('tags');
@@ -75,7 +94,7 @@ class Tag_model extends CI_Model {
         $lists = $query->result_array();
         return $lists;
     }
-    
+
     function update($data, $id) {
         $this->db->where('id', $id);
         $this->db->update('tags', $data);
@@ -99,9 +118,11 @@ class Tag_model extends CI_Model {
     function delete($data) {
         return $this->db->delete('tags', $data);
     }
+
     function deleteUserTags($data) {
         return $this->db->delete('girl_tags', $data);
     }
+
     function insertUserTags($data) {
         $this->db->insert('girl_tags', $data);
         return $this->db->insert_id();

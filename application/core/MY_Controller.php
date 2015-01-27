@@ -35,7 +35,7 @@ class MY_Controller extends CI_Controller {
         $this->configs = $this->configs_model->getConfigs();
         $this->data['configs'] = $this->configs;
         $this->data['informations'] = $this->information->listInformations(array('footer_display' => 1));
-
+        $this->data['tab_tags'] = $this->getTags();
         $this->data['header_title'] = '';
         $this->data['breadcrumbs'] = array();
     }
@@ -44,7 +44,7 @@ class MY_Controller extends CI_Controller {
         return $this->location->listLocations();
     }
     public function getTags() {
-        return $this->tag->listTags();
+        return $this->tag->listAllTags();
     }
 
     function load($tpl_view, $body_view = null) {
