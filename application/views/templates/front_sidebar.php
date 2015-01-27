@@ -2,21 +2,26 @@
     <h1 class="title">
         Web cams
     </h1>
-    <div class="webcam">
-        <div class="wc-img">
-            <img border="0" width="220" src="<?php echo base_url('public/images/34-LondonTS220.jpg') ?>">
+    <?php if (!empty($sbbanners)): ?>
+        <div class="webcam">
+            <?php foreach ($sbbanners as $banner): ?>
+                <div class="wc-img">
+                    <a target="__blank" href="<?php echo $banner['url'] ?>" title="<?php echo $banner['name'] ?>">
+                        <?php if (!empty($banner['image'])): ?>
+                            <img border="0" width="220" src="<?php echo base_url('public/images/banners/' . $banner['image']) ?>">
+                        <?php elseif (!empty($banner['image_link'])): ?>
+                            <img border="0" width="220" src="<?php echo $banner['image_link'] ?>">
+                        <?php endif; ?>
+                    </a>
+                </div>
+            <?php endforeach; ?>
         </div>
-
-        <div class="wc-img">
-            <img border="0" width="220" src="<?php echo base_url('public/images/45-riorelax_220x318-eng.gif') ?>">
-        </div>
-    </div>
-
+    <?php endif; ?>
     <div class="locations">
         <div class="header">Location area link space</div>
         <div class="location-area">
             <?php foreach ($tab_locations as $location): ?>
-            <a href="<?php echo site_url('location/'.$location['id'].'-'.  convertTitle($location['name'])) ?>"><?php echo $location['name'] ?></a>
+                <a href="<?php echo site_url('location/' . $location['id'] . '-' . convertTitle($location['name'])) ?>"><?php echo $location['name'] ?></a>
             <?php endforeach; ?>
             <div class="clb"></div>
         </div>

@@ -13,6 +13,15 @@ class User_model extends CI_Model {
         return $this->db->get()->row_array();
     }
 
+    public function getUser($data = array()) {
+        $this->db->select("*");
+        $this->db->from("user");
+        foreach ($data as $key => $val) {
+            $this->db->where($key, $val);
+        }
+        return $this->db->get()->row_array();
+    }
+
     public function getUsers($data = array(), $limit = null, $start = null, $sort = array()) {
         $this->db->select("*");
         $this->db->from("user");
@@ -38,11 +47,11 @@ class User_model extends CI_Model {
 
         return $query->result_array();
     }
-    
+
     public function totalUsers($data = array()) {
         $this->db->select("*");
         $this->db->from("user");
-        
+
         if (!empty($data)) {
             foreach ($data as $key => $value) {
                 if ($key == 'search') {
@@ -54,9 +63,8 @@ class User_model extends CI_Model {
             }
         }
         $query = $this->db->get();
-        
+
         return $query->num_rows();
-        
     }
 
     public function insert($data) {
@@ -68,8 +76,6 @@ class User_model extends CI_Model {
         $this->db->where('id', $id);
         $this->db->update('user', $data);
     }
-    
-
 
     public function getUserByUsernameAndPassword($username, $password) {
         $this->db->select("*");
@@ -81,7 +87,7 @@ class User_model extends CI_Model {
     }
 
     public function delete($id) {
-        $this->db->delete('user', array('id' => $id)); 
+        $this->db->delete('user', array('id' => $id));
     }
 
 }

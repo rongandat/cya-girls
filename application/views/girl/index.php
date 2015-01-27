@@ -1,4 +1,14 @@
 <h1 class="title"><?php echo $girl['title']; ?></h1>
+<div class="profiletopbg">
+    <span>
+        <i class="fa fa-info red"></i>
+        $<?php echo $girl['cost'] ?>
+    </span>
+    <span>
+        <i class="fa fa-user red"></i>
+        <?php echo $girl['views'] ?>  Views
+    </span>
+</div>
 <div id="gallery" class="ad-gallery">
     <div class="ad-image-wrapper">
     </div>

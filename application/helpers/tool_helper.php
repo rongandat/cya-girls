@@ -3,7 +3,28 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+if (!function_exists('rand')) {
 
+    function rand($min = null, $max = null) {
+        static $seeded;
+
+        if (!isset($seeded)) {
+            mt_srand((double) microtime() * 1000000);
+            $seeded = true;
+        }
+
+        if (isset($min) && isset($max)) {
+            if ($min >= $max) {
+                return $min;
+            } else {
+                return mt_rand($min, $max);
+            }
+        } else {
+            return mt_rand();
+        }
+    }
+
+}
 if (!function_exists('create_random_value')) {
 
     function create_random_value($length = 15, $type = 'mixed') {
@@ -13,9 +34,9 @@ if (!function_exists('create_random_value')) {
         $rand_value = '';
         while (strlen($rand_value) < $length) {
             if ($type == 'digits') {
-                $char = $this->rand(0, 9);
+                $char = rand(0, 9);
             } else {
-                $char = chr($this->rand(0, 255));
+                $char = chr(rand(0, 255));
             }
             if ($type == 'mixed') {
                 if (preg_match('/^[a-z0-9]$/', $char))
@@ -28,6 +49,7 @@ if (!function_exists('create_random_value')) {
                     $rand_value .= $char;
             }
         }
+        return $rand_value;
     }
 
 }

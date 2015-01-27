@@ -28,6 +28,12 @@ class Girls_model extends CI_Model {
         $this->db->update('girl', $data);
     }
 
+    public function updateView($id) {
+        $this->db->set('views', 'views + 1', FALSE);
+        $this->db->where('id', $id);
+        $this->db->update('girl', array());
+    }
+
     function insert($data) {
         $this->db->set('date_added', 'NOW()', FALSE);
         $this->db->insert('girl', $data);
@@ -76,6 +82,7 @@ class Girls_model extends CI_Model {
         $lists = $query->result_array();
         return $lists;
     }
+
     function listGirlTotal($data = array(), $dataIn = array()) {
         $this->db->select('count(DISTINCT `girl`.id) as total', FALSE);
         $this->db->from('girl');
@@ -106,7 +113,7 @@ class Girls_model extends CI_Model {
                 $this->db->where_in($key, $list);
             }
         }
-        
+
 
         if ($limit && $offset) {
             $this->db->limit($limit, $offset);
@@ -137,8 +144,7 @@ class Girls_model extends CI_Model {
         $total = $query->row_array();
         return $total['total'];
     }
-    
-    
+
     function listGirlsByTag($data = array(), $dataIn = array(), $id = 0, $fields = 'girl.*', $limit = 10, $offset = null, $order = 'girl.id', $sort = 'DESC') {
         $imageDefaultSql = '(select image from images where girl_id = girl.id and `default` = 1 limit 1) as image';
         $this->db->select('DISTINCT `girl`.id,' . $fields . ', ' . $imageDefaultSql, FALSE);
@@ -153,7 +159,7 @@ class Girls_model extends CI_Model {
                 $this->db->where_in($key, $list);
             }
         }
-        
+
 
         if ($limit && $offset) {
             $this->db->limit($limit, $offset);

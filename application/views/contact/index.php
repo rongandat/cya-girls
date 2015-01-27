@@ -1,3 +1,76 @@
+<div class="contact-us" style="">
+    <p>
+        <strong><i class="fa fa-compass"></i> Visit Us:</strong> 
+        <?php echo $configs['company'] ?>, <?php echo $configs['address'] ?>
+    </p>
+    <p> <strong><i class="fa fa-phone"></i> Phone:</strong> <?php echo $configs['phone'] ?></p>
+    <p> <strong><i class="fa fa-fax"></i> Fax:</strong> <?php echo $configs['fax'] ?></p>
+    <p> <strong><i class="fa fa-inbox"></i> Contact:</strong> <a href="mailto:<?php echo $configs['email_config'] ?>"><?php echo $configs['email_config'] ?></a></p>
+</div>
+
+<form class="contact-form " action="" method="post">
+    <div class="row">
+        <?php if (!empty($errors)): ?>
+            <div class="alert alert-danger alert-dismissable">
+                <h4>Oh snap! You got an error!</h4>
+                <p>Change this and that and try again.</p>
+                <ul>
+                    <?php foreach ($errors as $key => $error): ?>
+                        <li><strong><?php echo $key ?> field: </strong><?php echo $error ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+        <?php if (!empty($success)): ?>
+            <div class="alert alert-block alert-success">
+                <p>
+                    <strong>
+                        <i class="ace-icon fa fa-check"></i>
+                        Well done!
+                    </strong>
+                    <?php echo $success; ?>
+                </p>
+            </div>
+        <?php endif; ?>
+
+        <div class="searchingNum">Get In Touch</div>
+        <div class="inputcount">
+            <div class="inputLeft rightGap">
+                <div class="inputTxt">Name <span>*</span></div>
+                <div class="inputTxtbox"><input type="text" value="<?php echo!empty($post['name']) ? $post['name'] : '' ?>" id="name" name="name"></div>
+            </div>
+            <div class="inputLeft">
+                <div class="inputTxt">Email <span>*</span></div>
+                <div class="inputTxtbox">
+                    <input type="text" value="<?php echo!empty($post['email']) ? $post['email'] : '' ?>" id="email" name="email">
+                </div>
+            </div>
+            <div class="clb"></div>
+        </div>
+        <div class="inputcount">
+            <div class="inputfull">
+                <div class="inputTxt">Subject</div>
+                <div class="inputTxtbox"><input type="text" value="<?php echo!empty($post['subject']) ? $post['subject'] : '' ?>" id="subject" name="subject"></div>
+            </div>
+            <div class="clb"></div>
+        </div>
+        <div class="inputcount bottomBder">
+            <div class="inputfull">
+                <div class="inputTxt">Message <span>*</span></div>
+                <div class="inputTxtbox">
+                    <textarea class="form-control" name="message" rows="3"><?php echo!empty($post['message']) ? $post['message'] : '' ?></textarea>
+                </div>
+            </div>
+            <div class="clb"></div>
+        </div>
+        <div class="createLogin">
+            <input type="submit" value="Submit Message" class="btn btn-danger">
+        </div>
+    </div>
+    <!-- row-fluid -->
+
+</form>
+
 <section id="google-map" class="section google-map">
     <div class="container">
         <div class="pad-25">
@@ -13,7 +86,6 @@
                 var geocoder;
                 var address;
                 var myLatlng;
-
                 geocoder = new google.maps.Geocoder();
                 geocoder.geocode({"address": "<?php echo $configs['address'] ?>"}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
@@ -21,7 +93,6 @@
                         //lat = results[0].geometry.location.lat();
                         //myLatlng = new google.maps.LatLng(lat,lng);
                         myLatlng = results[0].geometry.location;
-
                         mapOptions = {
                             center: myLatlng,
                             zoom: 15,
@@ -38,94 +109,12 @@
                         alert("Address not found");
                     }
                 });
-
                 //Wait until the DOM is fully loaded
                 $(document).ready(function() {
                     //Listen for the form submit
                     $(".showError").html("");
                 });
-
             })(jQuery);
         </script>
     </div>
 </section>
-<!-- /#google-map -->
-<section id="contact-us" class="pad-25">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="visit-us pad-top-25">
-                    <div class="subpage-title">
-                        <h5><i class="fa fa-compass"></i> Visit Us</h5>
-                    </div>
-                    <address>
-                        <strong><?php echo $configs['company'] ?></strong><br>
-                        <?php echo $configs['address'] ?>
-                    </address>
-                </div>
-                <div class="contact-numbers pad-top-25">
-                    <div class="subpage-title">
-                        <h5><i class="fa fa-phone"></i> Contact</h5>
-                    </div>
-                    <address>
-                        Phone: <?php echo $configs['phone'] ?><br>
-                        Fax: <?php echo $configs['fax'] ?><br>
-                        <a href="mailto:<?php echo $configs['email_config'] ?>"><?php echo $configs['email_config'] ?></a>
-                    </address>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <form class="contact-form pad-25" action="" method="post">
-                    <div class="subpage-title">
-                        <h5>Get In Touch</h5>
-                    </div>
-                    <div class="row">
-                        <?php if (!empty($errors)): ?>
-                            <div class="alert alert-danger alert-dismissable">
-                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                                <h4>Oh snap! You got an error!</h4>
-                                <p>Change this and that and try again.</p>
-                                <ul>
-                                    <?php foreach ($errors as $key => $error): ?>
-                                        <li><strong><?php echo $key ?> fields: </strong><?php echo $error ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-                        <?php endif; ?>
-                        <?php if (!empty($success)): ?>
-                            <div class="alert alert-block alert-success">
-                                <button data-dismiss="alert" class="close" type="button">
-                                    <i class="ace-icon fa fa-times"></i>
-                                </button>
-
-                                <p>
-                                    <strong>
-                                        <i class="ace-icon fa fa-check"></i>
-                                        Well done!
-                                    </strong>
-                                    <?php echo $success; ?>
-                                </p>
-                            </div>
-                        <?php endif; ?>
-                        <div class="col-md-4">
-                            <input class="form-control" name="name" placeholder="Name (required)" type="text">
-                        </div>
-                        <div class="col-md-4">
-                            <input class="form-control" name="email" placeholder="Email (required)" type="text">
-                        </div>
-                        <div class="col-md-4">
-                            <input class="form-control" name="subject" placeholder="Subject (Optional)" type="text">
-                        </div>
-                    </div>
-                    <!-- row-fluid -->
-                    <textarea class="form-control" name="message" placeholder="Your Message (required)" rows="3"></textarea>
-                    <button class="btn btn-flat flat-color btn-rounded">Submit Message</button>
-                </form>
-                <!-- /.contact-form -->
-            </div>
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
-</section>
-<!-- /#contact-us -->

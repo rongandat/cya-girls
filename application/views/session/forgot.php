@@ -4,7 +4,6 @@
         <strong>Oh snap! </strong> <?php echo $error; ?>
     </div>
 <?php endif; ?>
-
 <?php if (!empty($success)): ?>
     <div class="alert alert-block alert-success">
         <p>
@@ -16,7 +15,6 @@
         </p>
     </div>
 <?php endif; ?>
-
 <!-- Login Form Starts -->
 <form role="form" class="form-inline" method="post" action="">
 
@@ -25,22 +23,16 @@
             <div class="inputTxt">Username <span>*</span></div>
             <div class="inputTxtbox"><input type="text" value="" id="username" name="username"></div>
         </div>
-        <div class="inputLeft">
-            <div class="inputTxt">Password <span>*</span></div>
-            <div class="inputTxtbox">
-                <input type="password" autocomplete="off" value="" id="password" name="password">
-            </div>
-        </div>
         <div class="clb"></div>
     </div>
 
     <div class="createLogin">
-        <input type="submit" value="Login" class="btn btn-danger">
+        <input type="submit" value="Forgot password" class="btn btn-danger">
     </div>
 </form>
 <div class="submitbutton">
+    <div class="rightbox"><a class="btn btn-danger" href="<?php echo site_url('session/login') ?>">Login</a></div>
     <div class="flbox"><a class="btn btn-danger" href="<?php echo site_url('session/register') ?>">Register</a></div>
-    <div class="rightbox"><a class="btn btn-danger" href="<?php echo site_url('session/forgot') ?>">Forgot password</a></div>
     <div class="clb"></div>
 </div>
 <!-- Login Form Ends -->

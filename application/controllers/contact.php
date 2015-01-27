@@ -23,10 +23,10 @@ class Contact extends MY_Controller {
     
     public function __construct() {
         parent::__construct();
+        $this->data['tab_locations'] = $this->getLocations();
     }
     public function index() {
         $this->data['header_title'] = 'Contact';
-        $this->data['no_sidebar'] = true;
         $this->data['success'] = $this->session->flashdata('success');
         if($this->input->post()){
             $posts = $this->input->post();
@@ -34,7 +34,7 @@ class Contact extends MY_Controller {
             $this->data['errors'] = $error;
             if(empty($error)){
                 $dataEmail['home_page'] = site_url();
-                $dataEmail['logo'] = 'Sexy';
+                $dataEmail['logo'] = 'Japan Shemale Escort';
                 $dataEmail['contact_page'] = site_url('contact');
                 $dataEmail['name'] = $posts['name'];
                 $dataEmail['email'] = $posts['email'];
@@ -54,13 +54,13 @@ class Contact extends MY_Controller {
         $posts = $this->input->post();
         $error = array();
         if(empty($posts['name'])){
-            $error[] = 'please input your name';
+            $error['Name'] = 'please input your name';
         }
         if(empty($posts['email'])){
-            $error[] = 'please input your email';
+            $error['Email'] = 'please input your email';
         }
         if(empty($posts['message'])){
-            $error[] = 'please input your email message';
+            $error['Message'] = 'please input your email message';
         }
         return $error;
     }

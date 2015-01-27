@@ -29,8 +29,11 @@ class Girls extends MY_Controller {
     public function index($url) {
         $id = current(explode('-', $url));
         $girl = $this->girl->getGirl(array('id' => $id));
+        
         if (empty($girl))
             redirect('');
+        $this->girl->updateView($id);
+        
         $this->data['header_title'] = $girl['title'];
         $optionValue = $this->option_value->listValuesByGirl(array('girl_id' => $id), array(), 'options.name, girl_option_value.value');
         $locations = $this->location->listLocationsByGirl(array('girl_id' => $id));

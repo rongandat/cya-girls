@@ -9,7 +9,7 @@
         <link href="<?php echo base_url() ?>public/front/css/style.css" rel="stylesheet">
         <!-- Font Awesome  -->    
         <link href="<?php echo base_url() ?>public/front/css/font-awesome.min.css" rel="stylesheet">
-        
+
         <script src="<?php echo base_url() ?>public/front/js/jquery-2.0.3.min.js"></script>
         <script src="<?php echo base_url() ?>public/front/ad.gallery/jquery.ad-gallery.min.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA--E5qbTljwwsFv4KFErXHprtsB4_iO9k&sensor=false"></script>
@@ -20,15 +20,27 @@
             <div class="top-header">
                 <div class="login-area">
                     <ul class="lg-rg">
-                        <li>
-                            <a href="<?php echo site_url('session/login') ?>">Log in</a>
-                        </li>
-                        <li>
-                            |
-                        </li>
-                        <li>
-                            <a href="<?php echo site_url('session/register') ?>">Register</a>
-                        </li>
+                        <?php if (empty($auth)): ?>
+                            <li>
+                                <a href="<?php echo site_url('session/login') ?>">Log in</a>
+                            </li>
+                            <li>
+                                |
+                            </li>
+                            <li>
+                                <a href="<?php echo site_url('session/register') ?>">Register</a>
+                            </li>
+                        <?php else: ?>
+                            <li>
+                                <a href="<?php echo site_url('manager') ?>"><?php echo $auth['firstname'] . ' ' . $auth['lastname'] ?></a>
+                            </li>
+                            <li>
+                                |
+                            </li>
+                            <li>
+                                <a href="<?php echo site_url('session/logout') ?>">logout</a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
 
                 </div>
@@ -46,11 +58,11 @@
             <div class="nav-header">
                 <ul class="list-inline">
                     <li class="schema"><a href="<?php echo site_url() ?>" class="active">SHEMALE ESCORT</a></li>
-                    <li class="advertise"><a href="<?php echo site_url() ?>">ADVERTISE</a></li>
+                    <li class="advertise"><a href="<?php echo site_url('page/7-advertising') ?>">ADVERTISE</a></li>
                     <li class="webcams"><a href="<?php echo site_url('webcams') ?>">WEB CAMS</a></li>
                     <li class="links"><a href="<?php echo site_url('links') ?>">LINKS</a></li>
                     <li class="contact"><a href="<?php echo site_url('contact') ?>">CONTACT</a></li>
-                    <li class="recuit"><a href="<?php echo site_url('recruit') ?>">RECRUIT (求人)</a></li>
+                    <li class="recuit"><a href="<?php echo site_url('page/8-recruit-') ?>">RECRUIT (求人)</a></li>
                 </ul>
             </div><!-- /.nav -->
         </div><!-- /#header -->
@@ -73,7 +85,7 @@
                 <div class="tags">
                     <?php foreach ($tab_tags as $tag): ?>
                         <?php $class = ($tag['count'] >= 6) ? 'biggest' : (($tag['count'] <= 6 && $tag['count'] >= 2 ) ? 'big' : '') ?>
-                    <a href="<?php echo site_url('girls/tag/' . $tag['id'] . '-' . convertTitle($tag['name'])) ?>" class="<?php echo $class; ?>"><?php echo $tag['name'] ?></a>
+                        <a href="<?php echo site_url('girls/tag/' . $tag['id'] . '-' . convertTitle($tag['name'])) ?>" class="<?php echo $class; ?>"><?php echo $tag['name'] ?></a>
                     <?php endforeach; ?>
                     <div class="clb"></div>
                 </div>
@@ -88,9 +100,7 @@
                     <li><a href="<?php echo site_url('page/' . $information['id'] . '-' . convertTitle($information['title'])) ?>"><?php echo $information['title'] ?></a></li>
                 <?php endforeach; ?>
                 <li><a href="<?php echo site_url('links') ?>">Links</a></li>
-                <li><a href="#">Advertise</a></li>
                 <li><a href="<?php echo site_url('webcams') ?>">Webcams</a></li>
-                <li><a href="<?php echo site_url('recruit') ?>">Recruit (求人)</a></li>
             </ul>
             <div class="text-footer">
                 The site contains sexually explicit material. Enter ONLY if you are over 18 or <a href="#">leave the site</a>

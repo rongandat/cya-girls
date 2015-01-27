@@ -32,10 +32,12 @@ class MY_Controller extends CI_Controller {
         $this->load->model('tag_model', 'tag');
         $this->load->model('girl_option_value_model', 'option_value');
         $this->load->model('information_model', 'information');
+        $this->load->model('banner_model', 'banner');
         $this->configs = $this->configs_model->getConfigs();
         $this->data['configs'] = $this->configs;
         $this->data['informations'] = $this->information->listInformations(array('footer_display' => 1));
         $this->data['tab_tags'] = $this->getTags();
+        $this->data['sbbanners'] = $this->banner->listBanners(array('status' => 1));
         $this->data['header_title'] = '';
         $this->data['breadcrumbs'] = array();
     }

@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Page extends MY_Controller {
+class Banners extends MY_Controller {
 
     protected $lang;
 
@@ -15,7 +15,7 @@ class Page extends MY_Controller {
         if (empty($user_session)) {
             redirect(admin_url('authenticate/login'));
         }
-        $this->data['header_title'] = $this->configs['page_title'] . ' - ' . 'Page';
+        $this->data['header_title'] = $this->configs['page_title'] . ' - ' . 'Banners';
     }
 
     public function index() {
@@ -25,67 +25,77 @@ class Page extends MY_Controller {
             return;
         }
         $this->data['success'] = $this->session->flashdata('success');
-        $this->load->model('information_model', 'information');
-        $this->data['informations'] = $this->information->listInformations();
-        $this->load('admin_layout', 'admincp/page/index');
+        
+        $this->data['banners'] = $this->banner->listBanners();
+        $this->load('admin_layout', 'admincp/banners/index');
     }
 
     public function delete() {
-        $this->load->model('information_model', 'information');
+        $this->load->model('banner_model', 'banner');
         $flag = true;
         $ids = $this->input->get('ids');
         $error = array();
         if (!$this->hasPermission('modify')) {
             $this->session->set_flashdata('error', 'You don\'t permission for this action');
-            redirect(admin_url('page'));
+            redirect(admin_url('banners'));
         }
 
         $idList = explode(',', $ids);
         foreach ($idList as $id) {
-            $this->information->delete(array('id' => $id));
+            $this->banner->delete(array('id' => $id));
         }
-        $this->session->set_flashdata('success', 'Delete page success');
-        redirect(admin_url('page'));
+        $this->session->set_flashdata('success', 'Delete user success');
+        redirect(admin_url('banners'));
     }
 
     public function update($id = 0) {
-        $this->data['breadcrumbs'][] = array('link' => admin_url('user'), 'title' => 'Location');
+        $this->data['breadcrumbs'][] = array('banner' => admin_url('user'), 'title' => 'Location');
         $this->data['breadcrumbs'][] = array('title' => 'Update');
         if (!$this->permission()) {
             $this->load('admin_layout', 'admincp/permission');
             return;
         }
-        $this->load->model('information_model', 'information');
+        $this->load->model('banner_model', 'banner');
 
-        $information = $this->information->getInformation(array('id' => $id));
-        if (empty($information) && !empty($id)) {
-            redirect(admin_url('page/update'));
+        $banner = $this->banner->getBannerById($id);
+        if (empty($banner) && !empty($id)) {
+            redirect(admin_url('banners/update'));
         }
-        $this->data['information'] = $information;
+        $this->data['banner'] = $banner;
         $posts = $this->input->post();
         if ($posts) {
-            $this->data['information'] = $posts;
+            $this->data['banner'] = $posts;
             $user = $posts;
             $error = $this->validate($posts, $id);
             $this->data['error'] = $error;
             if (empty($error)) {
-                $information = $posts;
-                $information['footer_display'] = !empty($posts['footer_display']) ? 1 : 0;
+                
+                $banner = $posts;
+                $imageBanner = $_FILES['image'];
+                if (!empty($imageBanner['tmp_name'])) {
+                    $bannerName = time() . '.' . $imageBanner['name'];
+                    $destination = PUBLICPATH . 'images/banners/' . $bannerName;
+                    if (@move_uploaded_file($imageBanner['tmp_name'], $destination)) {
+                        $banner['image'] = $bannerName;
+                    }
+                }
+                if(!empty($banner['status']))
+                    $banner['status'] = 1;
                 if (empty($id)) {
-                    $information_id = $this->information->insert($information);
-                    redirect(admin_url('page'));
-                    $this->session->set_flashdata('success', 'Add information success');
+                    $banner_id = $this->banner->insert($banner);
+                    redirect(admin_url('banners'));
+                    $this->session->set_flashdata('success', 'Add banner success');
                 } else {
-                    $this->information->update($information, $id);
-                    $this->session->set_flashdata('success', 'Update information success');
-                    redirect(admin_url('page'));
+                    $this->banner->update($banner, $id);
+                    $this->session->set_flashdata('success', 'Update banner success');
+                    redirect(admin_url('banners'));
                 }
             }
         }
-        $this->load('admin_layout', 'admincp/page/update');
+        $this->load('admin_layout', 'admincp/banners/update');
     }
 
-    private function validate($information, $id = 0) {
+    private function validate($banner, $id = 0) {
         $posts = $this->input->post();
 
         $flag = true;
@@ -95,9 +105,6 @@ class Page extends MY_Controller {
             $flag = false;
         }
 
-        if (empty($information['title'])) {
-            $error['title'] = 'Please enter title';
-        }
 
 
         return $error;
