@@ -25,7 +25,7 @@ class Banners extends MY_Controller {
             return;
         }
         $this->data['success'] = $this->session->flashdata('success');
-        
+        $this->load->model('banner_model', 'banner');
         $this->data['banners'] = $this->banner->listBanners();
         $this->load('admin_layout', 'admincp/banners/index');
     }

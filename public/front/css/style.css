@@ -1054,6 +1054,20 @@ ul.pagination li.active a{
     vertical-align: middle;
 }
 
-div.content ul, div.content ol{
+div.content-page ul, div.content-page ol{
     padding: 10px 20px;
+}
+
+ul.social-links{
+    list-style: none;
+    float: right;
+}
+
+ul.social-links li{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+ul.social-links li i{
+    color: #000
 }

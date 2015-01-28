@@ -8,6 +8,14 @@
         <i class="fa fa-user red"></i>
         <?php echo $girl['views'] ?>  Views
     </span>
+
+    <ul class="social-links flr">
+        <li><a target="_blank" href="<?php echo!empty($girl['facebook']) ? $girl['facebook'] : '#' ?>" class="facebook"><i class="fa fa-facebook"></i></a></li>
+        <li><a target="_blank" href="<?php echo!empty($girl['google_plus']) ? $girl['google_plus'] : '#' ?>" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
+        <li><a target="_blank" href="<?php echo!empty($girl['twitter']) ? $girl['twitter'] : '#' ?>" class="twitter"><i class="fa fa-twitter"></i></a></li>
+        <li><a target="_blank" href="<?php echo!empty($girl['pinterest']) ? $girl['pinterest'] : '#' ?>" class="pinterest"><i class="fa fa-pinterest"></i></a></li>
+        <li><a target="_blank" href="<?php echo!empty($girl['home_page']) ? $girl['home_page'] : '#' ?>" class="rss"><i class="fa fa-rss"></i></a></li>
+    </ul>
 </div>
 <div id="gallery" class="ad-gallery">
     <div class="ad-image-wrapper">
