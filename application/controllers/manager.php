@@ -27,10 +27,122 @@ class Manager extends MY_Controller {
 
     public function index() {
         $this->data['breadcrumbs'][] = array('title' => 'Girls');
+        $this->data['header_title'] = 'Girls manager';
         $auth = $this->session->userdata('auth');
         if (empty($auth))
             redirect();
         $this->load('front_layout', 'manager/index');
+    }
+
+    public function changepassword() {
+        $this->data['header_title'] = 'Change password';
+
+        $auth = $this->session->userdata('auth');
+        $this->data['success'] = $this->session->flashdata('success');
+        if (empty($auth))
+            redirect();
+        $this->load->model('user_model', 'user');
+        $user = $this->user->getUserById($auth['id']);
+        $posts = $this->input->post();
+        if ($this->input->post()) {
+            $error = $this->validateChangePassword($user);
+            if (empty($error)) {
+                $dataUpdate['password'] = md5($posts['password']);
+                $this->user->update($auth['id'], $dataUpdate);
+                $this->session->set_flashdata('success', 'Update password success');
+                redirect(site_url('manager/changepassword'));
+            }
+        }
+        $this->data['errors'] = $error;
+        $this->load('front_layout', 'manager/changepassword');
+    }
+
+    public function validateChangePassword($user) {
+        $posts = $this->input->post();
+        $error = array();
+        if($user['password'] != md5($posts['oldpassword'])){
+            $error['Old password'] = 'Old password wrong';
+        }
+        if (empty($posts['password']) || strlen($posts['password']) < 7) {
+            $error['password'] = 'Minimum of 7 characters.';
+        }
+
+        if ($posts['password'] != $posts['repassword']) {
+            $error['repassword'] = 'Passwords do not match. Please re-enter your password';
+        }
+        return $error;
+    }
+
+    public function profile() {
+        $auth = $this->session->userdata('auth');
+        $this->data['success'] = $this->session->flashdata('success');
+        if (empty($auth))
+            redirect();
+        $this->load->model('user_model', 'user');
+        $user = $this->user->getUserById($auth['id']);
+        $posts = $this->input->post();
+        $error = array();
+        if ($this->input->post()) {
+            $error = $this->validateProfile();
+            if (empty($error)) {
+                $this->user->update($auth['id'], $posts);
+                $this->session->set_flashdata('success', 'Update profile success');
+                redirect(site_url('manager/profile'));
+            }
+        } else {
+            $posts = $user;
+        }
+        $this->data['post'] = $posts;
+        $this->data['errors'] = $error;
+        $this->data['header_title'] = 'Profile';
+        $this->load('front_layout', 'manager/profile');
+    }
+
+    private function validateProfile() {
+        $auth = $this->session->userdata('auth');
+        $id = $auth['id'];
+        $posts = $this->input->post();
+        $error = array();
+        $regex = '/^[-a-zA-Z0-9._]+$/';
+        if (strlen($posts['username']) <= 3 || strlen($posts['username']) > 25 || !preg_match($regex, $posts['username'])) {
+            $error['username'] = 'Username min 2 alpha character. Max 25 alpha characters. Allow \'_\' and \'.\'';
+            $flag = false;
+        }
+        $dataUserCheck = array(
+            'username' => $posts['username']
+        );
+        if (!empty($id)) {
+            $dataUserCheck['id !='] = $id;
+        }
+        $checkUser = $this->user->totalUsers($dataUserCheck);
+        if ($checkUser > 0) {
+            $error['username'] = 'Username arealdy exists';
+            $flag = false;
+        }
+
+        $regex = '/^[-a-zA-Z0-9&\'._ ]+$/';
+        if (strlen($posts['firstname']) < 2 || strlen($posts['firstname']) > 20) {
+            $error['firstname'] = 'Please enter your first name';
+        }
+
+        if (!preg_match($regex, $posts['firstname'])) {
+            $error['firstname'] = 'Min 2 alpha character. Max 20 alpha characters. Allow \'-\', " \' ", \'_\' and \'.\'';
+        }
+
+        if (strlen($posts['lastname']) < 2 || strlen($posts['lastname']) > 20) {
+            $error['lastname'] = 'Please enter your last name';
+        }
+
+        if (!preg_match($regex, $posts['lastname'])) {
+            $error['lastname'] = 'Min 2 alpha character. Max 20 alpha characters. Allow \'-\', " \' ", \'_\' and \'.\'';
+        }
+
+        if (!valid_email($posts['email'])) {
+            $error['email'] = 'Email do not match';
+            $flag = false;
+        }
+
+        return $error;
     }
 
     public function form($id = 0) {
@@ -84,7 +196,7 @@ class Manager extends MY_Controller {
         if ($posts) {
             $this->data['girl'] = $posts;
             $error = $this->validate($girl, $id);
-            $this->data['error'] = $error;
+            $this->data['errors'] = $error;
             if (empty($error)) {
                 $dataCommon['title'] = $posts['title'];
                 $dataCommon['fullname'] = $posts['fullname'];

@@ -74,7 +74,7 @@ class User_model extends CI_Model {
 
     public function update($id, $data) {
         $this->db->where('id', $id);
-        $this->db->update('user', $data);
+        return $this->db->update('user', $data);
     }
 
     public function getUserByUsernameAndPassword($username, $password) {

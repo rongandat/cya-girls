@@ -65,7 +65,9 @@ class Ajax extends MY_Controller {
 
         $this->load->model('girls_model', 'girl');
         $auth = $this->session->userdata('auth');
-        $dataWhere = array('girl.user_id' => $auth['id']);
+        $dataWhere = 'girl.user_id =' . $auth['id'];
+        if (!empty($search))
+            $dataWhere .= ' AND (girl.title like "%' . $search . '%" OR girl.fullname like "%' . $search . '%")';
         $girls = $this->girl->listGirls($dataWhere, array(), 0, 'girl.*', $recordPerPage, $start, $order, $sort);
 
         $totals = $this->girl->listGirlTotal($dataWhere);

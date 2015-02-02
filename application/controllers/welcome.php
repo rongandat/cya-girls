@@ -33,7 +33,7 @@ class Welcome extends MY_Controller {
         $this->load->model('image_model', 'image');
         $this->load->model('tag_model', 'tag');
         $this->load->model('girl_option_value_model', 'option_value');
-        $girls = $this->girl->listGirls(array('status' => 1));
+        $girls = $this->girl->listGirls(array('status' => 1), array(), 0, '*', 20);
 
         $listGirls = array();
         foreach ($girls as $girl) {

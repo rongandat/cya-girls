@@ -21,7 +21,13 @@ class Test extends CI_Controller {
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-        $this->load->view('test');
+        array_map('unlink', glob(PUBLICPATH.'tmps/administrator/medium/*'));
+        array_map('unlink', glob(PUBLICPATH.'tmps/administrator/small/*'));
+        array_map('unlink', glob(PUBLICPATH.'tmps/administrator/thumbnail/*'));
+        rmdir(PUBLICPATH.'tmps/administrator/medium');
+        rmdir(PUBLICPATH.'tmps/administrator/small');
+        rmdir(PUBLICPATH.'tmps/administrator/thumbnail');
+        rmdir(PUBLICPATH.'tmps/administrator');
     }
 
 }

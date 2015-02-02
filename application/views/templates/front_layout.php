@@ -6,14 +6,19 @@
         <meta name="keywords" content="<?php echo $configs['page_title']; ?>">
         <meta name="description" content="<?php echo $configs['page_keyword']; ?>">
         <title><?php echo $configs['page_description']; ?></title>
-        <link href="<?php echo base_url() ?>public/front/css/style.css" rel="stylesheet">
         <!-- Font Awesome  -->    
         <link href="<?php echo base_url() ?>public/front/css/font-awesome.min.css" rel="stylesheet">
+        <link href="<?php echo base_url() ?>public/front/css/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="<?php echo base_url() ?>public/front/css/style.css" rel="stylesheet">
 
         <script src="<?php echo base_url() ?>public/front/js/jquery-2.0.3.min.js"></script>
+         <script src="<?php echo base_url(); ?>/public/admin/js/jquery.dataTables.min.js"></script>
         <script src="<?php echo base_url() ?>public/front/ad.gallery/jquery.ad-gallery.min.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA--E5qbTljwwsFv4KFErXHprtsB4_iO9k&sensor=false"></script>
         <link href="<?php echo base_url() ?>public/front/ad.gallery/jquery.ad-gallery.css" rel="stylesheet">
+        <script>
+            var base_url = '<?php echo site_url(); ?>';
+        </script>
     </head>
     <body>
         <div id="header">
@@ -82,7 +87,7 @@
                 POPULAR SEARCH
             </div>
             <?php if (!empty($tab_tags)): ?>
-                <div class="tags">
+                <div class="tags-lb">
                     <?php foreach ($tab_tags as $tag): ?>
                         <?php $class = ($tag['count'] >= 6) ? 'biggest' : (($tag['count'] <= 6 && $tag['count'] >= 2 ) ? 'big' : '') ?>
                         <a href="<?php echo site_url('girls/tag/' . $tag['id'] . '-' . convertTitle($tag['name'])) ?>" class="<?php echo $class; ?>"><?php echo $tag['name'] ?></a>

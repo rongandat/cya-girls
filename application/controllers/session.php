@@ -182,9 +182,7 @@ class Session extends MY_Controller {
         $dataUserCheck = array(
             'username' => $posts['username']
         );
-        if (!empty($id)) {
-            $dataUserCheck['username !='] = $posts['username'];
-        }
+        
         $checkUser = $this->user->totalUsers($dataUserCheck);
         if ($checkUser > 0) {
             $error['username'] = 'Username arealdy exists';

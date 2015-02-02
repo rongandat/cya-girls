@@ -2,19 +2,21 @@
 
 <div class="tabbable">
     <form id="fileupload" action="" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
-        <?php if (!empty($errors)): ?>
-            <div class="alert alert-danger alert-dismissable">
-                <h4>Oh snap! You got an error!</h4>
-                <p>Change this and that and try again.</p>
-                <ul>
-                    <?php foreach ($errors as $key => $error): ?>
-                        <li><strong><?php echo $key ?> field: </strong><?php echo $error ?></li>
-                    <?php endforeach; ?>
-                </ul>
+        <?php if (!empty($error['permission'])): ?>
+            <div class="alert alert-danger">
+                <button data-dismiss="alert" class="close" type="button">
+                    <i class="ace-icon fa fa-times"></i>
+                </button>
+                <?php echo $error['permission'] ?>
+                <br>
             </div>
         <?php endif; ?>
         <?php if (!empty($success)): ?>
             <div class="alert alert-block alert-success">
+                <button data-dismiss="alert" class="close" type="button">
+                    <i class="ace-icon fa fa-times"></i>
+                </button>
+
                 <p>
                     <strong>
                         <i class="ace-icon fa fa-check"></i>
@@ -142,7 +144,7 @@
 
                 <div class="inputcount">
                     <div class="inputLeft rightGap">
-                        <div class="inputTxt">Locations <span>*</span></div>
+                        <div class="inputTxt">Locations</div>
                         <div class="inputTxtbox">
                             <select multiple="" class="chosen-select form-control " name='locations[]' data-placeholder="Choose a State...">
                                 <?php foreach ($locations as $location): ?>
